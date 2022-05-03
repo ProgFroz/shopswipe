@@ -3,9 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  config: {
+    apiKey: 'AIzaSyBtvc5bVYfc4mo8K9pmqHmkn1lJoV1cEtQ',
+    authDomain: 'shopswipe-4db02.firebaseapp.com',
+    projectId: 'shopswipe-4db02',
+    storageBucket: 'shopswipe-4db02.appspot.com',
+    messagingSenderId: '944456673812',
+    appId: '1:944456673812:web:b46ef6275ce3d57865d501',
+    measurementId: 'G-3F028VLWK5'
+  }
 };
-
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
