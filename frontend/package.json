@@ -20,13 +20,14 @@
     "@angular/platform-browser-dynamic": "~10.2.0",
     "@angular/router": "~10.2.0",
     "@clr/angular": "4.0.16",
+    "@clr/icons": "4.0.16",
+    "@clr/ui": "4.0.16",
+    "@ngrx/store": "^10.1.2",
+    "@webcomponents/webcomponentsjs": "^2.0.0",
     "firebase": "^9.7.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
-    "zone.js": "~0.10.2",
-    "@clr/ui": "4.0.16",
-    "@clr/icons": "4.0.16",
-    "@webcomponents/webcomponentsjs": "^2.0.0"
+    "zone.js": "~0.10.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1002.0",
