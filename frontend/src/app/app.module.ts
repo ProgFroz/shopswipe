@@ -4,14 +4,26 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {environment} from '../environments/environment';
 import firebase from 'firebase/compat';
+import { ClarityModule } from '@clr/angular';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginComponent } from './container/login/login.component';
+import { LoginP12lComponent } from './presentational/login-p12l/login-p12l.component';
+import { HomeP12lComponent } from './presentational/home-p12l/home-p12l.component';
+import { HomeComponent } from './container/home/home.component';
 
 firebase.initializeApp(environment.config);
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    LoginP12lComponent,
+    HomeP12lComponent,
+    HomeComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    ClarityModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
