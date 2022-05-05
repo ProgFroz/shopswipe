@@ -10,6 +10,8 @@ import { LoginComponent } from './container/login/login.component';
 import { LoginP12lComponent } from './presentational/login-p12l/login-p12l.component';
 import { HomeP12lComponent } from './presentational/home-p12l/home-p12l.component';
 import { HomeComponent } from './container/home/home.component';
+import {AppRoutingModule} from './app-routing.module';
+import {RouterModule} from '@angular/router';
 
 firebase.initializeApp(environment.config);
 @NgModule({
@@ -23,7 +25,9 @@ firebase.initializeApp(environment.config);
   imports: [
     BrowserModule,
     ClarityModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
