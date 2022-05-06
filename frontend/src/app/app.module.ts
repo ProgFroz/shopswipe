@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {environment} from '../environments/environment';
-import firebase from 'firebase/compat';
+import firebase from 'firebase';
 import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './container/login/login.component';
@@ -12,8 +12,14 @@ import { HomeP12lComponent } from './presentational/home-p12l/home-p12l.componen
 import { HomeComponent } from './container/home/home.component';
 import {AppRoutingModule} from './app-routing.module';
 import {RouterModule} from '@angular/router';
+import { EffectsModule } from '@ngrx/effects';
+import {StoreModule, StoreRootModule} from '@ngrx/store';
+import {globalReducers} from './ngrx/ngrx-models';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {AngularFireModule} from '@angular/fire';
+import {HttpClientModule} from '@angular/common/http';
 
-firebase.initializeApp(environment.config);
+//firebase.initializeApp(environment.config);
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,13 +29,22 @@ firebase.initializeApp(environment.config);
     HomeComponent
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.config),
+    HttpClientModule,
     BrowserModule,
     ClarityModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    EffectsModule.forRoot([]),
+    StoreRootModule,
+    StoreModule.forRoot(globalReducers, {}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
+    }),
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: 'de-DE'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
