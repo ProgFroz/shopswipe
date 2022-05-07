@@ -1,10 +1,11 @@
 <div class="login-wrapper">
-  <form class="login" style="padding: 1.2rem 4rem 1.2rem 3.5rem">
+  <div class="login" style="padding: 1.2rem 4rem 1.2rem 3.5rem">
     <section class="title">
-      <img [src]="'/assets/biglogo.svg'">
+      <img [src]="">
     </section>
-    <div class="login-group">
-      <button class="btn" (click)="googleSignInMethod()">Login with Google</button>
+    <div>
+      <button class="btn" style="width: -webkit-fill-available" (click)="emitGoogleSignIn()">Login with Google</button>
     </div>
-  </form>
+  </div>
 </div>
+

@@ -3,8 +3,8 @@ import {LOCALE_ID, NgModule} from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {environment} from '../environments/environment';
+// @ts-ignore
 import firebase from 'firebase';
-import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './container/login/login.component';
 import { LoginP12lComponent } from './presentational/login-p12l/login-p12l.component';
@@ -18,8 +18,10 @@ import {globalReducers} from './ngrx/ngrx-models';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {AngularFireModule} from '@angular/fire';
 import {HttpClientModule} from '@angular/common/http';
+import {UserEffects} from './ngrx/effect/user.effects';
+import {ClarityModule} from '@clr/angular';
 
-//firebase.initializeApp(environment.config);
+firebase.initializeApp(environment.config);
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +38,7 @@ import {HttpClientModule} from '@angular/common/http';
     BrowserAnimationsModule,
     AppRoutingModule,
     RouterModule,
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([UserEffects]),
     StoreRootModule,
     StoreModule.forRoot(globalReducers, {}),
     StoreDevtoolsModule.instrument({

@@ -22,27 +22,4 @@ export class LoginP12lComponent implements OnInit {
   emitGoogleSignIn(): void {
     this.googleSignIn.emit(true);
   }
-
-  googleSignInMethod(): void {
-    this.authService.googleSignIn().then((t) => {
-      if (t) {
-        this.authService.getUser(t.user.uid).subscribe((u: User) => {
-          if (u) {
-            this.store.dispatch(loadUserSuccess({user: u}));
-          } else {
-            this.authService.updateUser({
-              uid: t.user.uid,
-              imageUrl: t.user.photoURL
-            }).subscribe((userx: User) => {
-              if (userx) {
-                this.store.dispatch(loadUserSuccess({user: userx}));
-              }
-            });
-          }
-        });
-      } else {
-        console.error('t was null');
-      }
-    });
-  }
 }

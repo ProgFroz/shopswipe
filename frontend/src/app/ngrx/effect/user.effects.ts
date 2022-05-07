@@ -5,7 +5,6 @@ import {of} from 'rxjs';
 import { from } from 'rxjs';
 import {googleLogin, loadAuthUserFailure, loadUser, loadUserFailure, loadUserSuccess} from '../action/user.actions';
 import {RestClientService} from '../../rest-client.service';
-import firebase from 'firebase';
 
 @Injectable()
 export class UserEffects {

@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
+// @ts-ignore
 import firebase from 'firebase';
 import {AngularFireAuth} from '@angular/fire/auth';
 
