@@ -35,4 +35,8 @@ export class RestClientService {
   updateUser(user: any): Observable<any> {
     return this.http.post('/posts/user/update', user);
   }
+
+  logoutUser(): Promise<void> {
+    return firebase.auth().signOut();
+  }
 }

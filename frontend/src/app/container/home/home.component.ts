@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AppState} from '../../ngrx/ngrx-models';
+import {Store} from '@ngrx/store';
+import {logoutUser} from '../../ngrx/action/user.actions';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private store: Store<AppState>) {
+  }
 
   ngOnInit(): void {
+  }
+
+  signOut(): void {
+    this.store.dispatch(logoutUser());
   }
 
 }

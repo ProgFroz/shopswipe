@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const admin = require("firebase-admin");
 const options = require('../config/admin');
+const User = require('../schema/users');
 
 admin.initializeApp({
   credential: admin.credential.cert(options),

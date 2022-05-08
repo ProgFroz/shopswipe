@@ -19,7 +19,7 @@ export const loadAuthUserFailure = createAction(
 
 export const loadUser = createAction(
   '[Auth] DB User loading',
-  props<{uid: string}>()
+  props<{uid: string, email: string, imageUrl: string}>()
 );
 
 export const loadUserSuccess = createAction(
@@ -28,11 +28,39 @@ export const loadUserSuccess = createAction(
 );
 
 export const loadUserFailure = createAction(
-  '[Auth] DB User loading success',
+  '[Auth] DB User loading failure',
+  props<{httpError: HttpErrorResponse}>()
+);
+
+export const createUser = createAction(
+  '[Auth] DB Create User loading',
+  props<{uid: string, email: string, imageUrl: string}>()
+);
+
+export const createUserSuccess = createAction(
+  '[Auth] DB Create User loading success',
+  props<{user: User}>()
+);
+
+export const createUserFailure = createAction(
+  '[Auth] DB Create User loading failure',
   props<{httpError: HttpErrorResponse}>()
 );
 
 export const loadingUser = createAction(
   '[Auth] Loading changed',
   props<{loading: boolean}>()
+);
+
+export const logoutUser = createAction(
+  '[Auth] logging out User...'
+);
+
+export const logoutUserSuccess = createAction(
+  '[Auth] logging out User success!'
+);
+
+export const logoutUserFailure = createAction(
+  '[Auth] logging out User failure.',
+  props<{httpError: HttpErrorResponse}>()
 );
