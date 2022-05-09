@@ -51,4 +51,13 @@ router.get('/groups/:gid/members', (req, res) => {
   });
 });
 
+router.get('/groups/code/:code', (req, res) => {
+  const code = req.params.code;
+  Group.findOne({code: code}).then((group) => {
+    res.json(group);
+  }).catch((err) => {
+    console.log(err);
+  });
+});
+
 module.exports = router;

@@ -56,6 +56,10 @@ export class RestClientService {
     return this.http.get('/gets/groups/' + gid + '/members');
   }
 
+  getGroupByCode(code: string): Observable<any> {
+    return this.http.get('/gets/groups/code/' + code);
+  }
+
   logoutUser(): Promise<void> {
     return firebase.auth().signOut();
   }

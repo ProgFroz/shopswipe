@@ -76,3 +76,22 @@ export const kickMemberFailure = createAction(
   '[Group] Kicking member failure.',
   props<{httpError: HttpErrorResponse}>()
 );
+
+export const loadGroupByCode = createAction(
+  '[Group] Load Group By Code',
+  props<{code: string}>()
+);
+
+export const loadGroupByCodeSuccess = createAction(
+  '[Group] Load Group By Code Success',
+  props<{group: Group}>()
+);
+
+export const loadGroupByCodeFailure = createAction(
+  '[Group] Load Group By Code Failure',
+  props<{httpError: HttpErrorResponse}>()
+);
+
+export const loadGroupByCodeReset = createAction(
+  '[Group] Reset Group By Code'
+);

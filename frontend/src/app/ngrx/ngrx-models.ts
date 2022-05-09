@@ -18,5 +18,7 @@ export interface UserState {
 
 export interface GroupsState {
   group: Group;
+  invitedGroup: Group;
   loading: boolean;
+  invitedGroupLoading: boolean;
 }

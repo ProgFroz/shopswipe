@@ -11,3 +11,12 @@ export const selectGroupLoading = createSelector(
   selectGroupsState,
   (state: GroupsState) => state.loading
 );
+
+export const selectInvitedGroup = createSelector(
+  selectGroupsState,
+  (state: GroupsState) => state.invitedGroup
+);
+export const selectInvitedGroupLoading = createSelector(
+  selectGroupsState,
+  (state: GroupsState) => state.invitedGroupLoading
+);

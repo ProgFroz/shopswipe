@@ -14,3 +14,8 @@ export interface Group {
   code: string;
   owner: string;
 }
+export enum LoadingState {
+  UNINITIALIZED,
+  LOADING,
+  FINISHED
+}

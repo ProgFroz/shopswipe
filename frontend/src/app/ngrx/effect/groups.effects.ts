@@ -9,7 +9,7 @@ import {
   createGroup,
   createGroupFailure,
   createGroupSuccess, kickMember, kickMemberFailure,
-  loadGroup,
+  loadGroup, loadGroupByCode, loadGroupByCodeSuccess,
   loadGroupFailure,
   loadGroupMembers,
   loadGroupMembersFailure,
@@ -79,6 +79,16 @@ export class GroupsEffects {
       switchMap((props) => from(this.restClientService.updateUserGroupID(props.uid, '')).pipe(
         map(() => loadGroupMembers({gid: props.gid})),
         catchError((err) => of(kickMemberFailure({httpError: err})))
+      ))
+    )
+  );
+
+  loadGroupByCode$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(loadGroupByCode),
+      switchMap((props) => from(this.restClientService.getGroupByCode(props.code)).pipe(
+        map((group) => loadGroupByCodeSuccess({group})),
+        catchError((err) => of(loadGroupMembersFailure({httpError: err})))
       ))
     )
   );

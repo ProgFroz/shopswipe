@@ -1,1 +1,22 @@
-<p>{{params ? params.code : "Test"}}</p>
+
+<clr-modal *ngIf="invitedGroup" [(clrModalOpen)]="joinGroupModalOpen" [clrModalClosable]="false">
+  <h3 class="modal-title">Join Group</h3>
+  <div class="modal-body">
+    <p>Do you want to join the group "{{invitedGroup.name}}"?</p>
+    <p>If you are currently part of a group, you will <b>leave it</b> and join the other instead!</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="joinGroupModalOpen = false; redirectToGroup()">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="submitJoin()">Ok</button>
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="errorModalOpen" [clrModalClosable]="false">
+  <h3 class="modal-title">Link Flawed</h3>
+  <div class="modal-body">
+    <p>The given link does not contain information of a given group. Please check whether the link is correct.</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="errorModalOpen = false; redirectToGroup()">Ok</button>
+  </div>
+</clr-modal>

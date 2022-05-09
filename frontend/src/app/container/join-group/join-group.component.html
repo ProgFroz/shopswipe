@@ -1,3 +1,8 @@
-<app-join-group-p12l [params]="route.params | async">
+<app-join-group-p12l
+  (joinGroupEmitter)="joinGroup($event)"
+  (redirectEmitter)="redirect()"
+  [invitedGroup]="invitedGroup$ | async"
+[invitedGroupLoading]="invitedGroupLoading$ | async"
+[user]="user$ | async">
 
 </app-join-group-p12l>
