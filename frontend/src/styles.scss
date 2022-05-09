@@ -82,10 +82,10 @@ app-groups {
   }
 }
 .action-holder {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   clr-icon {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
     cursor: pointer;
   }
 }

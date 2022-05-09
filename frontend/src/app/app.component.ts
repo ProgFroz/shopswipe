@@ -20,7 +20,6 @@ export class AppComponent {
       if (u) {
         console.log(u);
         this.store.dispatch(loadUser({uid: u.uid, email: u.email, imageUrl: u.photoURL, username: u.displayName}));
-        this.router.navigate(['home']);
       } else {
         this.router.navigate(['login']);
       }

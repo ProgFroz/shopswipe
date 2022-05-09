@@ -24,6 +24,8 @@ import { GroupsComponent } from './container/groups/groups.component';
 import { GroupsP12lComponent } from './presentational/groups-p12l/groups-p12l.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {GroupsEffects} from './ngrx/effect/groups.effects';
+import { JoinGroupComponent } from './container/join-group/join-group.component';
+import { JoinGroupP12lComponent } from './presentational/join-group-p12l/join-group-p12l.component';
 
 firebase.initializeApp(environment.config);
 @NgModule({
@@ -34,7 +36,9 @@ firebase.initializeApp(environment.config);
     HomeP12lComponent,
     HomeComponent,
     GroupsComponent,
-    GroupsP12lComponent
+    GroupsP12lComponent,
+    JoinGroupComponent,
+    JoinGroupP12lComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.config),

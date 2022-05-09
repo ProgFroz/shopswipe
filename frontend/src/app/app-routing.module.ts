@@ -4,6 +4,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './container/login/login.component';
 import {HomeComponent} from './container/home/home.component';
 import {GroupsComponent} from './container/groups/groups.component';
+import {JoinGroupComponent} from './container/join-group/join-group.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, children: [
       { path: '', redirectTo: 'group', pathMatch: 'full' },
       { path: 'group', component: GroupsComponent },
+      { path: 'join/:code', component: JoinGroupComponent },
     ]}
 ];
 
