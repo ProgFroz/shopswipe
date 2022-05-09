@@ -19,10 +19,33 @@ router.get('/user/:uid', (req, res) => {
   });
 });
 
+router.get('/user/:uid', (req, res) => {
+  const uid = req.params.uid;
+  User.findOne({uid: uid}).then((user) => {
+    res.json(user);
+  }).catch((err) => {
+    console.log(err);
+  });
+});
+
 router.get('/groups/:gid', (req, res) => {
   const gid = req.params.gid;
   Group.findOne({gid: gid}).then((group) => {
     res.json(group);
+  }).catch((err) => {
+    console.log(err);
+  });
+});
+
+router.get('/groups/:gid/members', (req, res) => {
+  const gid = req.params.gid;
+  Group.findOne({gid: gid}).then((group) => {
+    if (group) {
+      User.find({gid: gid}).then((users) => {
+        res.json(users);
+      })
+    }
+
   }).catch((err) => {
     console.log(err);
   });

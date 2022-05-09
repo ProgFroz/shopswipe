@@ -5,7 +5,7 @@ import {createGroup, loadGroup} from '../../ngrx/action/groups.actions';
 import {Observable} from 'rxjs';
 import {Group, User} from '../../models';
 import {selectUser} from '../../ngrx/selector/user.selectors';
-import {selectGroup} from '../../ngrx/selector/groups.selectors';
+import {selectGroup, selectGroupLoading} from '../../ngrx/selector/groups.selectors';
 
 @Component({
   selector: 'app-groups',
@@ -16,6 +16,7 @@ export class GroupsComponent implements OnInit {
 
   public user$: Observable<User> = this.store.select(selectUser);
   public group$: Observable<Group> = this.store.select(selectGroup);
+  public groupLoading$: Observable<boolean> = this.store.select(selectGroupLoading);
 
   constructor(private store: Store<AppState>) { }
 

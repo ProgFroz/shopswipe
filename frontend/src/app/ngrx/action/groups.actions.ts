@@ -51,3 +51,18 @@ export const updateGroupFailure = createAction(
   '[Group] Update Group Failure',
   props<{httpError: HttpErrorResponse}>()
 );
+
+export const loadGroupMembers = createAction(
+  '[Group] Load Group Members',
+  props<{gid: string}>()
+);
+
+export const loadGroupMembersSuccess = createAction(
+  '[Group] Load Group Members Success',
+  props<{members: User[]}>()
+);
+
+export const loadGroupMembersFailure = createAction(
+  '[Group] Load Group Members Failure',
+  props<{httpError: HttpErrorResponse}>()
+);

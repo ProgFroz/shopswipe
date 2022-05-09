@@ -18,7 +18,8 @@ export class AppComponent {
   constructor(private store: Store<AppState>, private router: Router) {
     firebase.auth().onAuthStateChanged((u) => {
       if (u) {
-        this.store.dispatch(loadUser({uid: u.uid, email: u.email, imageUrl: u.photoURL}));
+        console.log(u);
+        this.store.dispatch(loadUser({uid: u.uid, email: u.email, imageUrl: u.photoURL, username: u.displayName}));
         this.router.navigate(['home']);
       } else {
         this.router.navigate(['login']);

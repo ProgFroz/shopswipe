@@ -17,10 +17,6 @@ const Groups = mongoose.Schema({
     type: String,
     required: true
   },
-  members: {
-    type: Array,
-    required: true
-  },
   code: {
     type: String,
     required: true

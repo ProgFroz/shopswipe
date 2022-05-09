@@ -10,6 +10,7 @@ export interface Group {
   gid: string;
   name: string;
   date: Date;
-  members: User[];
+  members?: User[];
   code: string;
+  owner: string;
 }

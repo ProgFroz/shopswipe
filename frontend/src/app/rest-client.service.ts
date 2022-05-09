@@ -27,12 +27,16 @@ export class RestClientService {
     return this.http.get('/gets/user/' + uid);
   }
 
-  createUser(uid: string, email: string, imageUrl: string): Observable<any> {
-    return this.http.post('/posts/user/update', {uid, email, imageUrl});
+  createUser(uid: string, email: string, imageUrl: string, username: string): Observable<any> {
+    return this.http.post('/posts/user/update', {uid, email, imageUrl, username});
   }
 
   updateUser(user: any): Observable<any> {
     return this.http.post('/posts/user/update', user);
+  }
+
+  updateUserGroupID(uid: string, gid: string): Observable<any> {
+    return this.http.post('/posts/user/updateGroupId', {uid, gid});
   }
 
   createGroup(name: string, owner: string): Observable<any> {
@@ -40,13 +44,16 @@ export class RestClientService {
       gid: GroupsHelper.generateUUID(),
       name,
       owner,
-      code: GroupsHelper.generateUUID(),
-      members: [owner]
+      code: GroupsHelper.generateUUID()
     });
   }
 
   getGroup(gid: string): Observable<any> {
-    return gid.length > 0 ? this.http.get('/gets/groups/' + gid) : of(null);
+    return gid && gid.length > 0 ? this.http.get('/gets/groups/' + gid) : of(null);
+  }
+
+  getGroupMembers(gid: string): Observable<any> {
+    return this.http.get('/gets/groups/' + gid + '/members');
   }
 
   logoutUser(): Promise<void> {

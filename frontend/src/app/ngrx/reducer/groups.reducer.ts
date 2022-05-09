@@ -1,6 +1,6 @@
 import {createReducer, on} from '@ngrx/store';
 import {GroupsState} from '../ngrx-models';
-import {createGroup, loadGroup, loadGroupSuccess, loadingGroup} from '../action/groups.actions';
+import {createGroup, loadGroup, loadGroupMembersSuccess, loadGroupSuccess, loadingGroup} from '../action/groups.actions';
 
 export const groupsInitialState: GroupsState = {
   group: null,
@@ -17,6 +17,9 @@ export const groupsReducer = createReducer(
   }),
   on(loadGroupSuccess, (state, {group}) => {
     return ({...state, group, loading: false});
+  }),
+  on(loadGroupMembersSuccess, (state, {members}) => {
+    return ({...state, group: {...state.group, members}, loading: false});
   }),
   on(loadingGroup, (state, {loading}) => ({
     ...state,

@@ -1,6 +1,14 @@
 import {createReducer, on} from '@ngrx/store';
 import {UserState} from '../ngrx-models';
-import {loadingUser, loadUser, loadUserSuccess, logoutUser, logoutUserSuccess} from '../action/user.actions';
+import {
+  loadingUser,
+  loadUser,
+  loadUserSuccess,
+  logoutUser,
+  logoutUserSuccess, updateUserFailure,
+  updateUserGroupID,
+  updateUserSuccess
+} from '../action/user.actions';
 
 export const userIntialState: UserState = {
   user: null,
@@ -24,5 +32,14 @@ export const userReducer = createReducer(
   on(loadingUser, (state, { loading }) => ({
     ...state,
     loading
-  }))
+  })),
+  on(updateUserGroupID, (state) => {
+    return ({...state, loading: true});
+  }),
+  on(updateUserSuccess, (state, {user}) => {
+    return ({...state, user, loading: false});
+  }),
+  on(updateUserFailure, (state) => {
+    return ({...state, loading: false});
+  }),
 );

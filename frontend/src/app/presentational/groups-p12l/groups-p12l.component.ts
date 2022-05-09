@@ -12,6 +12,7 @@ export class GroupsP12lComponent implements OnInit {
   @Output() createGroupEmitter: EventEmitter<any> = new EventEmitter<any>();
   @Input() user: User;
   @Input() group: Group;
+  @Input() groupLoading: boolean;
 
   createGroupModalOpen = false;
   nameFormGroup: FormGroup;

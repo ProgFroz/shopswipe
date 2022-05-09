@@ -1,13 +1,30 @@
-<p (click)="createGroupModalOpen = true">Create Group</p>
 
-<div *ngIf="group" class="clr-row">
-  <div class="clr-col-lg-6 clr-col-12">
-    <div class="card">
-      <div class="card-img">
-        <img src="">
-      </div>
-      <div class="card-block">
-        <h4>{{group.name}}</h4>
+
+
+<div class="spinner-holder-centered" *ngIf="groupLoading">
+  <span class="spinner">
+    Loading...
+  </span>
+</div>
+<div *ngIf="!group && !groupLoading" class="create-group-button">
+  <div title="Create Group" (click)="createGroupModalOpen = true">
+    <clr-icon shape="plus" size="26"></clr-icon>
+  </div>
+</div>
+<div *ngIf="group && !groupLoading">
+  <h4 style="font-weight: bold">{{group.name}}</h4>
+  <div class="clr-row">
+    <div *ngFor="let member of group.members" class="clr-col-lg-6 clr-col-12">
+      <div class="card">
+        <div class="card-block member-card">
+          <div class="icon-and-name-holder">
+            <img [src]="member.imageUrl">
+            <h5>{{member.username}}</h5>
+          </div>
+          <div>
+            Kick
+          </div>
+        </div>
       </div>
     </div>
   </div>

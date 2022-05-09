@@ -23,12 +23,12 @@ router.post('/user/update', (req, res) => {
   });
   User.findOne({uid: req.body.uid}).then((e) => {
     if (e) {
-      e.uid = req.body.uid;
-      e.email = req.body.email;
-      e.date = req.body.date;
-      e.username = req.body.username;
-      e.imageUrl = req.body.imageUrl;
-      e.gid = req.body.gid;
+      e.uid = req.body.uid ? req.body.uid : e.uid;
+      e.email = req.body.email ? req.body.email : e.email;
+      e.date = req.body.date ? req.body.date : e.date;
+      e.username = req.body.username ? req.body.username : e.username;
+      e.imageUrl = req.body.imageUrl ? req.body.imageUrl : e.imageUrl;
+      e.gid = req.body.gid ? req.body.gid : e.gid;
       e.save().then((data) => {
         res.json(data);
       }).catch(err => {
@@ -41,6 +41,18 @@ router.post('/user/update', (req, res) => {
       }).catch(err => {
         res.json({message: err});
       });
+    }
+  })
+});
+router.post('/user/updateGroupId', (req, res) => {
+  User.findOne({uid: req.body.uid}).then((e) => {
+    if (e) {
+      e.gid = req.body.gid;
+      e.save().then((data) => {
+        res.json(data);
+      }).catch(err => {
+        res.json({message: err});
+      })
     }
   })
 });

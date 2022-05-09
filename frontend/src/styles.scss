@@ -1,0 +1,75 @@
+.rounded-corners {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.rounded-corners-small {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+*:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.userimg {
+  width: 60px;
+  height: 60px;
+  padding: 6px;
+}
+
+app-groups {
+  width: 100%;
+  padding: 1rem;
+}
+
+.spinner-holder-centered {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+}
+
+.create-group-button {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  div {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: hsl(198, 0%, 40%)
+  }
+
+  clr-icon {
+    color: white;
+  }
+}
+
+.member-card {
+  display: flex;
+  justify-content: space-between;
+}
+.icon-and-name-holder {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  img {
+    margin-right: 1rem;
+    border-radius: 5px;
+    width: 70px;
+    height: 70px;
+  }
+
+  h5 {
+    margin: 0;
+  }
+}
