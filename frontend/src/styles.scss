@@ -67,6 +67,10 @@ app-groups {
     border-radius: 6px;
     width: 70px;
     height: 70px;
+
+    border-color: #dedede;
+    border-style: solid;
+    border-width: 2px;
   }
 
   clr-icon {
@@ -75,5 +79,13 @@ app-groups {
   }
   h5 {
     margin: 0;
+  }
+}
+.action-holder {
+  clr-icon {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    cursor: pointer;
   }
 }
