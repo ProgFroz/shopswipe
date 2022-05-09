@@ -66,3 +66,13 @@ export const loadGroupMembersFailure = createAction(
   '[Group] Load Group Members Failure',
   props<{httpError: HttpErrorResponse}>()
 );
+
+export const kickMember = createAction(
+  '[Group] Kicking member...',
+  props<{uid: string, gid: string}>()
+);
+
+export const kickMemberFailure = createAction(
+  '[Group] Kicking member failure.',
+  props<{httpError: HttpErrorResponse}>()
+);

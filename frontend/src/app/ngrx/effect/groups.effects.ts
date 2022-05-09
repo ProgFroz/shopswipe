@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
 import {
   createGroup,
   createGroupFailure,
-  createGroupSuccess,
+  createGroupSuccess, kickMember, kickMemberFailure,
   loadGroup,
   loadGroupFailure,
   loadGroupMembers,
@@ -69,6 +69,16 @@ export class GroupsEffects {
       switchMap((props) => from(this.restClientService.getGroupMembers(props.gid)).pipe(
         map(members => loadGroupMembersSuccess({members})),
         catchError((err) => of(loadGroupMembersFailure({httpError: err})))
+      ))
+    )
+  );
+
+  kickMember$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(kickMember),
+      switchMap((props) => from(this.restClientService.updateUserGroupID(props.uid, '')).pipe(
+        map(() => loadGroupMembers({gid: props.gid})),
+        catchError((err) => of(kickMemberFailure({httpError: err})))
       ))
     )
   );

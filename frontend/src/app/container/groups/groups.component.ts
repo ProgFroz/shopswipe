@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {AppState} from '../../ngrx/ngrx-models';
 import {Store} from '@ngrx/store';
-import {createGroup} from '../../ngrx/action/groups.actions';
+import {createGroup, kickMember} from '../../ngrx/action/groups.actions';
 import {Observable} from 'rxjs';
 import {Group, User} from '../../models';
 import {selectUser} from '../../ngrx/selector/user.selectors';
 import {selectGroup, selectGroupLoading} from '../../ngrx/selector/groups.selectors';
+import {updateUserGroupID} from '../../ngrx/action/user.actions';
 
 @Component({
   selector: 'app-groups',
@@ -26,5 +27,9 @@ export class GroupsComponent implements OnInit {
 
   createGroup(holder: any): void {
     this.store.dispatch(createGroup({name: holder.name, owner: holder.owner}));
+  }
+
+  removeGroupId($event: any): void {
+    this.store.dispatch(kickMember({uid: $event.uid, gid: $event.gid}));
   }
 }

@@ -22,8 +22,8 @@
             <clr-icon *ngIf="isOwner(member)" shape="crown" size="24"></clr-icon>
             <h5>{{member.username}}</h5>
           </div>
-          <div>
-            Kick
+          <div style="display: flex; justify-content: flex-end; align-items: center">
+            <clr-icon *ngIf="isOwner(user) && !isOwner(member)" (click)="emitRemoveMemberFromGroup(member)" shape="times" size="24"></clr-icon>
           </div>
         </div>
       </div>

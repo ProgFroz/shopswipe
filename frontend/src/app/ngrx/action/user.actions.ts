@@ -69,6 +69,7 @@ export const updateUserGroupID = createAction(
   '[Auth] Update User GID loading',
   props<{uid: string, gid: string}>()
 );
+
 export const updateUserSuccess = createAction(
   '[Auth] Update User loading success',
   props<{user: User}>()
@@ -83,3 +84,4 @@ export const updateUserGoogleInformation = createAction(
   '[Auth] Update User Google Information loading',
   props<{uid: string, email: string, imageUrl: string, username: string}>()
 );
+

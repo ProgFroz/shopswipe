@@ -11,6 +11,8 @@ import * as moment from 'moment';
 export class GroupsP12lComponent implements OnInit {
 
   @Output() createGroupEmitter: EventEmitter<any> = new EventEmitter<any>();
+  @Output() removeMemberEmitter: EventEmitter<any> = new EventEmitter<any>();
+
   @Input() user: User;
   @Input() group: Group;
   @Input() groupLoading: boolean;
@@ -53,5 +55,9 @@ export class GroupsP12lComponent implements OnInit {
       }
     });
     return newArr;
+  }
+
+  emitRemoveMemberFromGroup(member: User): void {
+    this.removeMemberEmitter.emit({uid: member.uid, gid: member.gid});
   }
 }

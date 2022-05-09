@@ -1,5 +1,6 @@
 <app-groups-p12l
   (createGroupEmitter)="createGroup($event)"
+  (removeMemberEmitter)="removeGroupId($event)"
   [user]="user$ | async"
   [group]="group$ | async"
   [groupLoading]="groupLoading$ | async">
