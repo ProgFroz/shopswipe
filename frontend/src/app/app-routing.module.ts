@@ -13,7 +13,9 @@ const routes: Routes = [
       { path: '', redirectTo: 'group', pathMatch: 'full' },
       { path: 'group', component: GroupsComponent },
       { path: 'join/:code', component: JoinGroupComponent },
-    ]}
+    ]},
+
+  { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 
