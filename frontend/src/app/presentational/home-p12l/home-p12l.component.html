@@ -1,1 +1,34 @@
-<p (click)="emitLogout()">home-p12l works!</p>
+<clr-main-container *ngIf="user" style="overflow-x: hidden">
+  <clr-header>
+    <div class="branding">
+      <a [routerLink]="['shopping']" class="nav-link">
+<!--        <img [src]="'/assets/logo.svg'" style="height: 32px">-->
+        <h4 style="margin: auto; color: white; font-weight: bold">ShopSwipe</h4>
+      </a>
+    </div>
+    <div class="header-nav" [clr-nav-level]="1">
+<!--    <a class="nav-link nav-text" [routerLink]="['shopping']" [routerLinkActive]="'active'">Shopping List</a>-->
+    <a class="nav-link nav-text" [routerLink]="['group']" [routerLinkActive]="'active'">Group</a>
+<!--    <a class="nav-link nav-text" [routerLink]="['finances']" [routerLinkActive]="'active'">Finances</a>-->
+  </div>
+    <div class="header-actions">
+      <a href="#" class="nav-link nav-icon-text">
+        <span class="nav-text">{{user.username}}</span>
+      </a>
+      <img class="userimg rounded-corners" [src]="user.imageUrl ? user.imageUrl : '/assets/avatar.png'" alt="Avatar" onerror="this.onerror=null; this.src='/assets/avatar.png'">
+      <clr-dropdown>
+        <button class="nav-text" clrDropdownTrigger aria-label="open user profile">
+          <!--          {{user.email}}-->
+          <clr-icon shape="caret down"></clr-icon>
+        </button>
+        <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+          <a (click)="emitLogout()" clrDropdownItem>Log out</a>
+        </clr-dropdown-menu>
+      </clr-dropdown>
+    </div>
+  </clr-header>
+  <div class="content-container" style="overflow-y: auto; overflow-x: hidden">
+    <router-outlet></router-outlet>
+  </div>
+
+</clr-main-container>

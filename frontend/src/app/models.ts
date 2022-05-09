@@ -11,4 +11,5 @@ export interface Group {
   name: string;
   date: Date;
   members: User[];
+  code: string;
 }

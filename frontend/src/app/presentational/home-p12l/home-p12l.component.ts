@@ -1,4 +1,5 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {User} from '../../models';
 
 @Component({
   selector: 'app-home-p12l',
@@ -8,6 +9,8 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 export class HomeP12lComponent implements OnInit {
 
   @Output() logoutEmitter: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  @Input() user: User;
 
   constructor() { }
 

@@ -20,6 +20,10 @@ import {AngularFireModule} from '@angular/fire';
 import {HttpClientModule} from '@angular/common/http';
 import {UserEffects} from './ngrx/effect/user.effects';
 import {ClarityModule} from '@clr/angular';
+import { GroupsComponent } from './container/groups/groups.component';
+import { GroupsP12lComponent } from './presentational/groups-p12l/groups-p12l.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {GroupsEffects} from './ngrx/effect/groups.effects';
 
 firebase.initializeApp(environment.config);
 @NgModule({
@@ -28,7 +32,9 @@ firebase.initializeApp(environment.config);
     LoginComponent,
     LoginP12lComponent,
     HomeP12lComponent,
-    HomeComponent
+    HomeComponent,
+    GroupsComponent,
+    GroupsP12lComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.config),
@@ -38,7 +44,8 @@ firebase.initializeApp(environment.config);
     BrowserAnimationsModule,
     AppRoutingModule,
     RouterModule,
-    EffectsModule.forRoot([UserEffects]),
+    ReactiveFormsModule,
+    EffectsModule.forRoot([UserEffects, GroupsEffects]),
     StoreRootModule,
     StoreModule.forRoot(globalReducers, {}),
     StoreDevtoolsModule.instrument({

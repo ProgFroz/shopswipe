@@ -1,0 +1,31 @@
+<p (click)="createGroupModalOpen = true">Create Group</p>
+
+<div *ngIf="group" class="clr-row">
+  <div class="clr-col-lg-6 clr-col-12">
+    <div class="card">
+      <div class="card-img">
+        <img src="">
+      </div>
+      <div class="card-block">
+        <h4>{{group.name}}</h4>
+      </div>
+    </div>
+  </div>
+</div>
+
+<clr-modal [(clrModalOpen)]="createGroupModalOpen">
+  <h3 class="modal-title">Create Group</h3>
+  <div class="modal-body">
+    <form [formGroup]="nameFormGroup" clrForm>
+      <clr-input-container>
+        <label>Group Name</label>
+        <input placeholder="Full name" clrInput formControlName="name" name="name" required />
+        <clr-control-error>Minimum Length of 3 Characters!</clr-control-error>
+      </clr-input-container>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="createGroupModalOpen = false">Cancel</button>
+    <button type="button" class="btn btn-primary" [disabled]="nameFormGroup.invalid" (click)="submitName()">Ok</button>
+  </div>
+</clr-modal>

@@ -1,16 +1,19 @@
-import {Actions, createEffect, Effect, ofType} from '@ngrx/effects';
+import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {Injectable} from '@angular/core';
 import {catchError, map, switchMap} from 'rxjs/operators';
-import {of} from 'rxjs';
-import { from } from 'rxjs';
+import {from, of} from 'rxjs';
 import {
-  createUser, createUserFailure,
+  createUser,
+  createUserFailure,
   createUserSuccess,
   googleLogin,
   loadAuthUserFailure,
   loadUser,
   loadUserFailure,
-  loadUserSuccess, logoutUser, logoutUserFailure, logoutUserSuccess
+  loadUserSuccess,
+  logoutUser,
+  logoutUserFailure,
+  logoutUserSuccess
 } from '../action/user.actions';
 import {RestClientService} from '../../rest-client.service';
 import {Router} from '@angular/router';
@@ -67,6 +70,7 @@ export class UserEffects {
     private actions$: Actions,
     private restClientService: RestClientService,
     private router: Router
-  ) {}
+  ) {
+  }
 }
 
