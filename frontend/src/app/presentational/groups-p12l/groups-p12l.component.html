@@ -14,11 +14,12 @@
 <div *ngIf="group && !groupLoading">
   <h4 style="font-weight: bold">{{group.name}}</h4>
   <div class="clr-row">
-    <div *ngFor="let member of group.members" class="clr-col-lg-6 clr-col-12">
+    <div *ngFor="let member of sortMembersArray(group.members)" class="clr-col-lg-6 clr-col-12">
       <div class="card">
         <div class="card-block member-card">
           <div class="icon-and-name-holder">
             <img [src]="member.imageUrl">
+            <clr-icon *ngIf="isOwner(member)" shape="crown" size="24"></clr-icon>
             <h5>{{member.username}}</h5>
           </div>
           <div>

@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {RestClientService} from '../../rest-client.service';
+import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../ngrx/ngrx-models';
 import {googleLogin} from '../../ngrx/action/user.actions';
@@ -11,7 +10,8 @@ import {googleLogin} from '../../ngrx/action/user.actions';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<AppState>) {
+  }
 
   ngOnInit(): void {
   }

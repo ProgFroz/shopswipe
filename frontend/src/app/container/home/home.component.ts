@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AppState} from '../../ngrx/ngrx-models';
-import {select, Store} from '@ngrx/store';
+import {Store} from '@ngrx/store';
 import {logoutUser} from '../../ngrx/action/user.actions';
 import {User} from '../../models';
 import {selectUser} from '../../ngrx/selector/user.selectors';

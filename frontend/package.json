@@ -30,6 +30,7 @@
     "@webcomponents/webcomponentsjs": "^2.0.0",
     "firebase": "^7.21.1",
     "firebase-admin": "^9.4.2",
+    "moment": "^2.29.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "uuid": "^8.3.2",
