@@ -31,6 +31,8 @@ export class GroupsP12lComponent implements OnInit {
   copied = false;
 
   link = '';
+  kickMemberModalOpen = false;
+  kickingMember: User = null;
   constructor() {
     this.nameFormGroup = new FormGroup({
       name: new FormControl('', Validators.minLength(3))

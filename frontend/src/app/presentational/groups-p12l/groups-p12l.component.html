@@ -27,7 +27,7 @@
             <h5>{{member.username}}</h5>
           </div>
           <div class="action-holder">
-            <clr-icon *ngIf="isOwner(user) && !isOwner(member)" (click)="emitRemoveMemberFromGroup(member)" shape="times" size="24"></clr-icon>
+            <clr-icon *ngIf="isOwner(user) && !isOwner(member)" (click)="kickMemberModalOpen = true; kickingMember = member;" shape="times" size="24"></clr-icon>
           </div>
         </div>
       </div>
@@ -97,5 +97,16 @@
   <div class="modal-footer">
     <button type="button" class="btn btn-outline" (click)="leaveGroupModalOpen = false">Cancel</button>
     <button type="button" class="btn btn-primary" (click)="leaveGroup(); leaveGroupModalOpen = false;">Yes</button>
+  </div>
+</clr-modal>
+
+<clr-modal *ngIf="group" [(clrModalOpen)]="kickMemberModalOpen">
+  <h3 class="modal-title">Kick Member</h3>
+  <div class="modal-body">
+    <p>Are you sure you want to kick this member? They will not be able to rejoin this group unless they have the according link! </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="kickMemberModalOpen = false">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="emitRemoveMemberFromGroup(kickingMember); kickMemberModalOpen = false;">Yes</button>
   </div>
 </clr-modal>
