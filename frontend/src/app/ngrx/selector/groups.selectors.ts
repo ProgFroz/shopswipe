@@ -20,3 +20,8 @@ export const selectInvitedGroupLoading = createSelector(
   selectGroupsState,
   (state: GroupsState) => state.invitedGroupLoading
 );
+export const selectGenerateNewLinkLoading = createSelector(
+  selectGroupsState,
+  (state: GroupsState) => state.generateNewLinkLoading
+);
+

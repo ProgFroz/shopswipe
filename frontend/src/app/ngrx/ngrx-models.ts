@@ -21,4 +21,5 @@ export interface GroupsState {
   invitedGroup: Group;
   loading: boolean;
   invitedGroupLoading: boolean;
+  generateNewLinkLoading: boolean;
 }

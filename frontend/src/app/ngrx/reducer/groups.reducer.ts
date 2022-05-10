@@ -1,7 +1,7 @@
 import {createReducer, on} from '@ngrx/store';
 import {GroupsState} from '../ngrx-models';
 import {
-  createGroup,
+  createGroup, deleteGroup, deleteGroupSuccess, generateNewLink,
   loadGroup,
   loadGroupByCode, loadGroupByCodeFailure, loadGroupByCodeReset,
   loadGroupByCodeSuccess,
@@ -14,7 +14,8 @@ export const groupsInitialState: GroupsState = {
   group: null,
   invitedGroup: null,
   loading: true,
-  invitedGroupLoading: false
+  invitedGroupLoading: false,
+  generateNewLinkLoading: false
 };
 
 export const groupsReducer = createReducer(
@@ -26,7 +27,7 @@ export const groupsReducer = createReducer(
     return ({...state, loading: true});
   }),
   on(loadGroupSuccess, (state, {group}) => {
-    return ({...state, group, loading: false});
+    return ({...state, group, loading: false, generateNewLinkLoading: false});
   }),
   on(loadGroupMembersSuccess, (state, {members}) => {
     return ({...state, group: {...state.group, members}, loading: false});
@@ -42,6 +43,12 @@ export const groupsReducer = createReducer(
   }),
   on(loadGroupByCodeReset, (state) => {
     return ({...state, invitedGroup: null, invitedGroupLoading: false});
+  }),
+  on(generateNewLink, (state) => {
+    return ({...state, generateNewLinkLoading: true});
+  }),
+  on(deleteGroupSuccess, (state) => {
+    return ({...state, group: null});
   }),
   on(loadingGroup, (state, {loading}) => ({
     ...state,

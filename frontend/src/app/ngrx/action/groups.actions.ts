@@ -17,6 +17,9 @@ export const loadGroupSuccess = createAction(
   props<{group: Group}>()
 );
 
+export const loadGroupWasNull = createAction(
+  '[Group] User Has No Group'
+);
 export const loadGroupFailure = createAction(
   '[Group] Load Group Failure',
   props<{httpError: HttpErrorResponse}>()
@@ -68,12 +71,12 @@ export const loadGroupMembersFailure = createAction(
 );
 
 export const kickMember = createAction(
-  '[Group] Kicking member...',
+  '[Group] Kicking Member...',
   props<{uid: string, gid: string}>()
 );
 
 export const kickMemberFailure = createAction(
-  '[Group] Kicking member failure.',
+  '[Group] Kicking Member Failure.',
   props<{httpError: HttpErrorResponse}>()
 );
 
@@ -94,4 +97,53 @@ export const loadGroupByCodeFailure = createAction(
 
 export const loadGroupByCodeReset = createAction(
   '[Group] Reset Group By Code'
+);
+
+export const generateNewLink = createAction(
+  '[Group] Generating New Link...',
+  props<{gid: string}>()
+);
+
+export const generateNewLinkFailure = createAction(
+  '[Group] Generating New Link Failure.',
+  props<{httpError: HttpErrorResponse}>()
+);
+
+export const deleteGroup = createAction(
+  '[Group] Deleting Group...',
+  props<{gid: string}>()
+);
+
+export const deleteGroupSuccess = createAction(
+  '[Group] Deleting Group Success!'
+);
+
+export const deleteGroupFailure = createAction(
+  '[Group] Deleting Group Failure.',
+  props<{httpError: HttpErrorResponse}>()
+);
+
+export const promoteOwner = createAction(
+  '[Group] Promoting Owner...',
+  props<{gid: string, uid: string}>()
+);
+
+export const promoteOwnerSuccess = createAction(
+  '[Group] Promoting Owner Success!',
+  props<{gid: string}>()
+);
+
+export const promoteOwnerFailure = createAction(
+  '[Group] Promoting Owner Failure.',
+  props<{httpError: HttpErrorResponse}>()
+);
+
+export const leaveGroup = createAction(
+  '[Group] Leaving Group...',
+  props<{uid: string}>()
+);
+
+export const leaveGroupFailure = createAction(
+  '[Group] Leaving Group Failure.',
+  props<{httpError: HttpErrorResponse}>()
 );

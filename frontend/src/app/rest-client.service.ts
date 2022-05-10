@@ -39,6 +39,14 @@ export class RestClientService {
     return this.http.post('/posts/user/updateGroupId', {uid, gid});
   }
 
+  updateGroupCode(gid: string, code: string): Observable<any> {
+    return this.http.post('/posts/groups/updateCode', {gid, code});
+  }
+
+  updateGroupOwner(gid: string, uid: string): Observable<any> {
+    return this.http.post('/posts/groups/updateOwner', {gid, uid});
+  }
+
   createGroup(name: string, owner: string): Observable<any> {
     return this.http.post('/posts/groups/update', {
       gid: GroupsHelper.generateUUID(),
@@ -50,6 +58,10 @@ export class RestClientService {
 
   getGroup(gid: string): Observable<any> {
     return gid && gid.length > 0 ? this.http.get('/gets/groups/' + gid) : of(null);
+  }
+
+  deleteGroup(gid: string): Observable<any> {
+    return this.http.post('/posts/groups/delete', {gid});
   }
 
   getGroupMembers(gid: string): Observable<any> {

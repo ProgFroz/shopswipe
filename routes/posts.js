@@ -89,4 +89,40 @@ router.post('/groups/update', (req, res) => {
   })
 });
 
+router.post('/groups/updateCode', (req, res) => {
+  Group.findOne({gid: req.body.gid}).then((e) => {
+    if (e) {
+      e.code = req.body.code;
+      e.save().then((data) => {
+        res.json(data);
+      }).catch(err => {
+        res.json({message: err});
+      })
+    }
+  })
+});
+router.post('/groups/updateOwner', (req, res) => {
+  Group.findOne({gid: req.body.gid}).then((e) => {
+    if (e) {
+      e.owner = req.body.uid;
+      e.save().then((data) => {
+        res.json(data);
+      }).catch(err => {
+        res.json({message: err});
+      })
+    }
+  })
+});
+router.post('/groups/delete', (req, res) => {
+  Group.findOneAndDelete({gid: req.body.gid}).then((e) => {
+    console.log(e);
+    if (e) {
+        e.save().then((data) => {
+          res.json(data);
+        }).catch(err => {
+          res.json({message: err});
+        })
+    }
+  })
+});
 module.exports = router;

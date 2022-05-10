@@ -22,7 +22,7 @@
 
 app-groups {
   width: 100%;
-  padding: 1rem;
+  padding: 2rem;
 }
 
 .spinner-holder-centered {
@@ -88,4 +88,53 @@ app-groups {
   clr-icon {
     cursor: pointer;
   }
+}
+
+.flex-start {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.invitation-link {
+  margin-top: 0;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
+  white-space: nowrap;
+}
+
+.red:hover {
+  color: hsl(9, 100%, 43%)
+}
+.green:hover  {
+  color: hsl(93, 100%, 26%);
+}
+.blue:hover  {
+  color: hsl(198, 100%, 32%);
+}
+
+.clickable-icon {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.clickable-icon :hover {
+
 }

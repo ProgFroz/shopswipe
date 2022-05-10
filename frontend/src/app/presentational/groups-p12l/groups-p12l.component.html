@@ -1,6 +1,3 @@
-
-
-
 <div class="spinner-holder-centered" *ngIf="groupLoading">
   <span class="spinner">
     Loading...
@@ -12,7 +9,14 @@
   </div>
 </div>
 <div *ngIf="group && !groupLoading">
-  <h4 style="font-weight: bold">{{group.name}}</h4>
+  <div class="flex-space-between">
+    <h4 style="font-weight: bold; margin-top: 0">{{group.name}}</h4>
+    <div>
+      <clr-icon *ngIf="isOwner(user)" class="clickable-icon green" title="Open Share Menu" shape="share" size="24" style="margin-right: 6px" (click)="shareModalOpen = true"></clr-icon>
+      <clr-icon class="clickable-icon red" title="Leave Group" shape="logout" size="24" style="margin-right: 6px" (click)="leaveGroupModalOpen = true"></clr-icon>
+<!--      <clr-icon class="clickable-icon" shape="cog" size="24" (click)="settingsModalOpen = true"></clr-icon>-->
+    </div>
+  </div>
   <div class="clr-row">
     <div *ngFor="let member of sortMembersArray(group.members)" class="clr-col-lg-6 clr-col-12">
       <div class="card">
@@ -45,5 +49,53 @@
   <div class="modal-footer">
     <button type="button" class="btn btn-outline" (click)="createGroupModalOpen = false">Cancel</button>
     <button type="button" class="btn btn-primary" [disabled]="nameFormGroup.invalid" (click)="submitName()">Ok</button>
+  </div>
+</clr-modal>
+
+<clr-modal *ngIf="group" [(clrModalOpen)]="shareModalOpen">
+  <h3 class="modal-title">Share</h3>
+  <div class="modal-body">
+    <div style="padding-right: 1rem">
+      <div class="flex-space-between">
+        <h5 style="margin-top: 0; font-weight: bold">Invitation Link: </h5>
+        <div>
+          <clr-icon shape="copy" title="Copy To Clipboard" (click)="copyLinkToClipboard()" class="clickable-icon green" style="margin-right: 6px" size="24"></clr-icon>
+          <clr-icon shape="refresh" title="Generate New Link" (click)="generateNewLink()" class="clickable-icon blue" size="24"></clr-icon>
+        </div>
+      </div>
+      <h5 *ngIf="copied && !generateNewLinkLoading" style="margin-top: 0">Link copied to clipboard</h5>
+      <span *ngIf="generateNewLinkLoading" class="spinner spinner-inline">
+          Loading...
+      </span>
+      <h5 *ngIf="!copied && !generateNewLinkLoading" class="invitation-link">{{link}}</h5>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="shareModalOpen = false">Close</button>
+  </div>
+</clr-modal>
+
+<clr-modal *ngIf="group" [(clrModalOpen)]="settingsModalOpen">
+  <h3 class="modal-title">Settings</h3>
+  <div class="modal-body">
+    <div style="display: flex; justify-content: flex-start; align-items: center">
+      <h5 style="margin-top: 0; font-weight: bold; margin-right: 1rem">Invitation Link: </h5>
+      <h5 style="margin-top: 0; overflow-x: hidden; text-overflow: ellipsis; max-width: 200px; white-space: nowrap">{{group.code}}</h5>
+      <clr-icon shape="copy" style="cursor: pointer" size="24"></clr-icon>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="settingsModalOpen = false">Close</button>
+  </div>
+</clr-modal>
+
+<clr-modal *ngIf="group" [(clrModalOpen)]="leaveGroupModalOpen">
+  <h3 class="modal-title">Leave Group</h3>
+  <div class="modal-body">
+    <p>Are you sure you want to leave this group? You cannot return without the current invitation link!</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="leaveGroupModalOpen = false">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="leaveGroup(); leaveGroupModalOpen = false;">Yes</button>
   </div>
 </clr-modal>
