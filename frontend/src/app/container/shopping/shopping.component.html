@@ -1,0 +1,12 @@
+<app-shopping-p12l
+  [user]="user$ | async"
+  [shopping]="shopping$ | async"
+  [group]="group$ | async"
+  [groupLoading]="groupLoading$ | async"
+  [shoppingLoading]="shoppingLoading$ | async"
+  (newElementEmitter)="addElement($event)"
+  (deleteElementEmitter)="deleteElement($event)"
+  (finishElementEmitter)="finishElement($event)"
+  (activateElementEmitter)="activateElement($event)">
+
+</app-shopping-p12l>

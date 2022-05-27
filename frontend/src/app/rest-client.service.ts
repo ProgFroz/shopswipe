@@ -6,6 +6,7 @@ import {Observable, of} from 'rxjs';
 import firebase from 'firebase';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {GroupsHelper} from './util/groups.helper';
+import {ShoppingElement} from './models';
 
 @Injectable({providedIn: 'root'})
 export class RestClientService {
@@ -74,5 +75,21 @@ export class RestClientService {
 
   logoutUser(): Promise<void> {
     return firebase.auth().signOut();
+  }
+
+  getShoppingList(gid: string): Observable<any> {
+    return gid && gid.length > 0 ? this.http.get('/gets/shopping/' + gid) : of(null);
+  }
+
+  createShoppingList(gid: string, sid: string): Observable<any> {
+    return this.http.post('/posts/shopping/update', {gid, sid});
+  }
+
+  updateShoppingList(gid: string, elements: ShoppingElement[]): Observable<any> {
+    return this.http.post('/posts/shopping/update', {gid, elements});
+  }
+
+  deleteShopping(gid: string): Observable<any> {
+    return this.http.post('/posts/shopping/delete', {gid});
   }
 }

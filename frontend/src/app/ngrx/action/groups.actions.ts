@@ -115,7 +115,8 @@ export const deleteGroup = createAction(
 );
 
 export const deleteGroupSuccess = createAction(
-  '[Group] Deleting Group Success!'
+  '[Group] Deleting Group Success!',
+  props<{gid: string}>()
 );
 
 export const deleteGroupFailure = createAction(

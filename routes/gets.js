@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../schema/users');
 const Group = require('../schema/groups');
+const Shopping = require('../schema/shoppings');
 
 XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const http = new XMLHttpRequest();
@@ -55,6 +56,15 @@ router.get('/groups/code/:code', (req, res) => {
   const code = req.params.code;
   Group.findOne({code: code}).then((group) => {
     res.json(group);
+  }).catch((err) => {
+    console.log(err);
+  });
+});
+
+router.get('/shopping/:gid', (req, res) => {
+  const gid = req.params.gid;
+  Shopping.findOne({gid: gid}).then((list) => {
+    res.json(list);
   }).catch((err) => {
     console.log(err);
   });

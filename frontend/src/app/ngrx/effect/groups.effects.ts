@@ -127,7 +127,7 @@ export class GroupsEffects {
     this.actions$.pipe(
       ofType(deleteGroup),
       switchMap((props) => from(this.restClientService.deleteGroup(props.gid)).pipe(
-        map(() => deleteGroupSuccess()),
+        map(() => deleteGroupSuccess({gid: props.gid})),
         catchError((err) => of(deleteGroupFailure({httpError: err})))
       ))
     )

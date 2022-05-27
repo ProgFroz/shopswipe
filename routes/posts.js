@@ -4,6 +4,7 @@ const admin = require("firebase-admin");
 const options = require('../config/admin');
 const User = require('../schema/users');
 const Group = require('../schema/groups');
+const Shopping = require('../schema/shoppings');
 
 admin.initializeApp({
   credential: admin.credential.cert(options),
@@ -115,13 +116,70 @@ router.post('/groups/updateOwner', (req, res) => {
 });
 router.post('/groups/delete', (req, res) => {
   Group.findOneAndDelete({gid: req.body.gid}).then((e) => {
-    console.log(e);
     if (e) {
         e.save().then((data) => {
           res.json(data);
         }).catch(err => {
           res.json({message: err});
         })
+    }
+  })
+});
+
+router.post('/shopping/addlist', (req, res) => {
+  Shopping.findOne({gid: req.body.gid}).then((e) => {
+    if (!e) {
+      const u = new Shopping({
+        sid: req.body.sid,
+        gid: req.body.gid,
+        date: req.body.date,
+        elements: req.body.elements
+      });
+      u.save().then((data) => {
+        res.json(data);
+      }).catch(err => {
+        res.json({message: err});
+      })
+    }
+  })
+});
+router.post('/shopping/update', (req, res) => {
+  const u = new Shopping({
+    sid: req.body.sid,
+    gid: req.body.gid,
+    date: req.body.date,
+    elements: req.body.elements
+  });
+  Shopping.findOne({gid: req.body.gid}).then((e) => {
+    if (e) {
+      e.gid = req.body.gid ? req.body.gid : e.gid;
+      e.sid = req.body.sid ? req.body.sid : e.sid;
+      e.date = req.body.date ? req.body.date : e.date;
+      e.elements = req.body.elements ? req.body.elements : e.elements;
+      e.save().then((data) => {
+        res.json(data);
+      }).catch(err => {
+        res.json({message: err});
+      })
+    }
+    else {
+      u.save().then((data) => {
+        res.json(data);
+      }).catch(err => {
+        res.json({message: err});
+      })
+    }
+  })
+});
+
+router.post('/shopping/delete', (req, res) => {
+  Shopping.findOneAndDelete({gid: req.body.gid}).then((e) => {
+    if (e) {
+      e.save().then((data) => {
+        res.json(data);
+      }).catch(err => {
+        res.json({message: err});
+      })
     }
   })
 });

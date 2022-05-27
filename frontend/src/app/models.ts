@@ -19,3 +19,18 @@ export enum LoadingState {
   LOADING,
   FINISHED
 }
+export interface Shopping {
+  gid: string;
+  sid: string;
+  elements: ShoppingElement[];
+  date: Date;
+}
+export interface ShoppingElement {
+  name: string;
+  uid: string;
+  description: string;
+  amount: number;
+  isRepeatable: boolean;
+  isActive: boolean;
+  date: Date;
+}

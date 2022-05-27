@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import {BrowserModule, HAMMER_GESTURE_CONFIG, HammerGestureConfig} from '@angular/platform-browser';
 import {LOCALE_ID, NgModule} from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -26,8 +26,20 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {GroupsEffects} from './ngrx/effect/groups.effects';
 import { JoinGroupComponent } from './container/join-group/join-group.component';
 import { JoinGroupP12lComponent } from './presentational/join-group-p12l/join-group-p12l.component';
+import { ShoppingComponent } from './container/shopping/shopping.component';
+import { ShoppingP12lComponent } from './presentational/shopping-p12l/shopping-p12l.component';
+import {ShoppingEffects} from './ngrx/effect/shopping.effects';
+import * as Hammer from 'hammerjs';
+import { HammerModule } from '@angular/platform-browser';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 firebase.initializeApp(environment.config);
+export class HammerConfig extends HammerGestureConfig {
+  overrides = {
+    swipe: { enabled: false },
+    pan: { direction: Hammer.DIRECTION_HORIZONTAL },
+  };
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +50,9 @@ firebase.initializeApp(environment.config);
     GroupsComponent,
     GroupsP12lComponent,
     JoinGroupComponent,
-    JoinGroupP12lComponent
+    JoinGroupP12lComponent,
+    ShoppingComponent,
+    ShoppingP12lComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.config),
@@ -49,15 +63,18 @@ firebase.initializeApp(environment.config);
     AppRoutingModule,
     RouterModule,
     ReactiveFormsModule,
-    EffectsModule.forRoot([UserEffects, GroupsEffects]),
+    EffectsModule.forRoot([UserEffects, GroupsEffects, ShoppingEffects]),
     StoreRootModule,
     StoreModule.forRoot(globalReducers, {}),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode
     }),
+    HammerModule,
+    DragDropModule,
+
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'de-DE'}],
+  providers: [{ provide: LOCALE_ID, useValue: 'de-DE'}, {provide: HAMMER_GESTURE_CONFIG, useClass: HammerConfig}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
