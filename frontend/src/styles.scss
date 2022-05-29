@@ -99,9 +99,11 @@ app-groups, app-shopping {
     margin-bottom: 6px;
   }
   h5 {
-    margin: 0;
+    margin-top: 0;
   }
 }
+
+
 .action-holder {
   display: flex;
   justify-content: flex-end;
@@ -180,4 +182,15 @@ app-groups, app-shopping {
 
 .right {
   transform: translateX(200%);
+}
+
+.inactive {
+  background: rgb(230, 230, 230);
+}
+.card-clickable {
+  cursor: pointer;
+}
+.card-clickable:hover {
+  //border-color: rgb(100, 100, 100);
+  //box-shadow: 0 0.15rem 0 0 rgb(100, 100, 100);
 }

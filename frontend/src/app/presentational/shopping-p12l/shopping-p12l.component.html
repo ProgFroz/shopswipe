@@ -51,32 +51,90 @@
 <div *ngIf="!groupLoading && !shoppingLoading && !!group.members"  class="clr-row">
 
 
-  <div (panstart)="onPanStart($event, getId(element))" (panend)="onPanEnd($event, getId(element), element)"
+  <div (tap)="showInfo(element)" (panstart)="onPanStart($event, getId(element))" (panend)="onPanEnd($event, getId(element), element)"
        (pan)="onPan($event, getId(element), element)" *ngFor="let element of shopping.elements" class="clr-col-lg-6 clr-col-12 animated">
-    <div [id]="getId(element)" class="card">
+    <div [id]="getId(element)" class="card card-clickable" [class.inactive]="!element.isActive">
       <div class="card-block member-card">
-        <div class="icon-and-name-holder">
-          <img style="width: 40px; height: 40px;" [src]="findAccordingMember(element.uid)?.imageUrl">
-          <h5>{{element.name}}</h5>
+        <div style="display: flex; justify-content: space-between; align-items: center">
+          <div style="display: flex; justify-content: flex-start; align-items: center">
+            <img
+              style="width: 40px; height: 40px; margin-right: 20px; border-radius: 6px;border-color: #dedede; border-style: solid; border-width: 2px;"
+              [src]="findAccordingMember(element.uid)?.imageUrl">
+
+            <div style="display: flex; justify-content: flex-start; align-items: center; margin-right: 20px">
+              <clr-icon style="margin-right: 4px" size="20" shape="tag"></clr-icon>
+              <h5 style="margin-top: 0">{{element.name}}</h5>
+
+            </div>
+            <div style="display: flex; justify-content: flex-start; align-items: center">
+              <clr-icon style="margin-right: 4px" size="20" shape="hashtag"></clr-icon>
+              <h5 style="margin-top: 0">{{element.amount}}</h5>
+            </div>
+          </div>
+
+          <div>
+
+          </div>
         </div>
-        <div class="action-holder">
+<!--        <div class="action-holder">-->
+<!--          <button (click)="showInfo(element)" type="button" class="btn btn-icon btn-link" aria-label="info">-->
+<!--            <clr-icon shape="info-standard" size="24"></clr-icon>-->
+<!--          </button>-->
 
-          <button (click)="deleteElement(element)" type="button" class="btn btn-icon btn-warning" aria-label="warning">
-            <clr-icon shape="times" size="24"></clr-icon>
-          </button>
-
-          <button (click)="finishElement(element)" *ngIf="element.isActive"  type="button" class="btn btn-icon btn-success" aria-label="done">
-            <clr-icon shape="check" size="24"></clr-icon>
-          </button>
-
-          <button (click)="activateElement(element)" *ngIf="!element.isActive" type="button" class="btn btn-icon btn-primary" aria-label="settings">
-            <clr-icon shape="repeat" size="24"></clr-icon>
-          </button>
-
-        </div>
+<!--        </div>-->
       </div>
     </div>
 
 
   </div>
 </div>
+
+<clr-modal [(clrModalOpen)]="addPriceModalOpen" clrModalClosable="false">
+  <h3 class="modal-title">Add Price</h3>
+  <div class="modal-body">
+    <p>{{selectedElement?.name}}</p>
+    <form [formGroup]="priceFormGroup" clrForm>
+      <clr-input-container>
+        <label>Price</label>
+        <input placeholder="Price" type="number" clrInput formControlName="price" name="price" required />
+        <clr-control-error>Must be at least 0!</clr-control-error>
+        <clr-control-helper>Price of one unit in €</clr-control-helper>
+      </clr-input-container>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="addPriceModalOpen = false">Cancel</button>
+    <button type="button" class="btn btn-primary" [disabled]="priceFormGroup.invalid" (click)="submitPrice(); addPriceModalOpen = false">Ok</button>
+  </div>
+</clr-modal>
+
+<clr-modal *ngIf="selectedElement" [(clrModalOpen)]="infoModalOpen">
+  <h3 class="modal-title">Element Info</h3>
+  <div class="modal-body">
+    <div class="clr-row">
+      <div class="clr-col-12 flex-start">
+        <clr-icon style="margin-right: 4px" title="Name" size="20" shape="tag"></clr-icon>
+        <h5 style="margin-top: 0">{{selectedElement.name}}</h5>
+      </div>
+
+      <div class="clr-col-12 flex-start">
+        <clr-icon style="margin-right: 4px" title="Amount" size="20" shape="hashtag"></clr-icon>
+        <h5 style="margin-top: 0">{{selectedElement.amount}}</h5>
+      </div>
+
+      <div class="clr-col-12 flex-start">
+        <clr-icon style="margin-right: 4px" title="Creator" size="20" shape="user"></clr-icon>
+        <h5 style="margin-top: 0">{{findAccordingMember(selectedElement.uid).username}}</h5>
+      </div>
+
+      <div class="clr-col-12 flex-start">
+        <clr-icon style="margin-right: 4px" title="Repeatable" size="20" shape="refresh"></clr-icon>
+        <h5 style="margin-top: 0">{{selectedElement.isRepeatable ? 'Yes' : 'No'}}</h5>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="addPriceModalOpen = false">Cancel</button>
+    <button type="button" class="btn btn-primary" [disabled]="priceFormGroup.invalid" (click)="submitPrice(); addPriceModalOpen = false">Ok</button>
+  </div>
+</clr-modal>

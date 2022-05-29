@@ -25,7 +25,9 @@ export class ShoppingP12lComponent implements OnInit {
   @Output() deleteElementEmitter: EventEmitter<any> = new EventEmitter<any>();
   @Output() finishElementEmitter: EventEmitter<any> = new EventEmitter<any>();
   @Output() activateElementEmitter: EventEmitter<any> = new EventEmitter<any>();
+
   elementFormGroup: FormGroup;
+  priceFormGroup: FormGroup;
 
   deleted: ShoppingElement[] = [];
   finished: ShoppingElement[] = [];
@@ -34,6 +36,9 @@ export class ShoppingP12lComponent implements OnInit {
   @ViewChild('stack') stack;
 
   panend = false;
+  addPriceModalOpen = false;
+  selectedElement: ShoppingElement = null;
+  infoModalOpen = false;
 
   constructor(@Inject(DOCUMENT) document: Document) {
     this.elementFormGroup = new FormGroup({
@@ -41,6 +46,9 @@ export class ShoppingP12lComponent implements OnInit {
       description: new FormControl(''),
       amount: new FormControl('', Validators.min(1)),
       repeatable: new FormControl(false)
+    });
+    this.priceFormGroup = new FormGroup({
+      price: new FormControl('', Validators.min(0)),
     });
   }
 
@@ -88,7 +96,7 @@ export class ShoppingP12lComponent implements OnInit {
     this.deleteElementEmitter.emit({gid: this.user.gid, elements: newElements});
   }
 
-  finishElement(element: ShoppingElement): void {
+  finishElement(price: number, element: ShoppingElement): void {
     const newElements: ShoppingElement[] = [];
     this.shopping.elements.forEach((el) => {
       if (element !== el) { newElements.push(el); }
@@ -115,7 +123,15 @@ export class ShoppingP12lComponent implements OnInit {
       rv = rv < 195 ? 195 : rv;
       let gv = 255 * (1 - ($event.deltaX / 1150));
       gv = gv < 195 ? 195 : gv;
-      el.style.background = left ? 'rgb(255,' + rv + ',' + rv + ')' : (element.isActive ? 'rgba(' + gv + ',255,' + gv + ')' : 'rgba(' + gv + ',' + gv + ', 255)');
+      let gvn = $event.deltaX / 500;
+      gvn = gvn > 1 ? 1 : gvn;
+      let rvn = $event.deltaX / -500;
+      rvn = rvn > 1 ? 1 : rvn;
+      // el.style.background = left ? 'rgb(255,' + rv + ',' + rv + ')' : (element.isActive ? 'rgba(' + gv + ',255,' + gv + ')' : 'rgba(' + gv + ',' + gv + ', 255)');
+      // el.style.borderColor = !left ? 'hsl(93, ' + gvn * 100 + '%, 26%)' : 'hsl(9, ' + rvn * 100 + '%, 43%)';
+      // el.style.boxShadow = '0 0.15rem 0 0' + (!left ? 'hsl(93, ' + gvn * 100 + '%, 26%)' : 'hsl(9, ' + rvn * 100 + '%, 43%)');
+      el.style.borderColor = left ? 'hsl(9, 100%, 43%)' : ( element.isActive ? 'hsl(93, 100%, 26%)' : 'hsl(198, 100%, 32%)');
+      el.style.boxShadow = '0 0.15rem 0 0 ' + (left ? 'hsl(9, 100%, 43%)' : ( element.isActive ? 'hsl(93, 100%, 26%)' : 'hsl(198, 100%, 32%)'));
     }
   }
 
@@ -132,7 +148,8 @@ export class ShoppingP12lComponent implements OnInit {
       }
       else {
         if (element.isActive) {
-          this.finishElement(element);
+          this.selectedElement = element;
+          this.addPriceModalOpen = true;
         }
         else {
           this.activateElement(element);
@@ -141,7 +158,8 @@ export class ShoppingP12lComponent implements OnInit {
     } else{
       el.style.transform = 'translateX(' + 0 + 'px)';
       el.style.transition = 'all 0.2s ease';
-      el.style.background = 'rgb(255,255,255)';
+      el.style.borderColor = 'hsl(0, 0%, 87%)';
+      el.style.boxShadow = '0 0.15rem 0 0 #dedede';
     }
 
     el.style.zIndex = '0';
@@ -152,5 +170,15 @@ export class ShoppingP12lComponent implements OnInit {
     el.style.zIndex = '99';
     this.panend = false;
     el.style.transition = 'none';
+  }
+
+  showInfo(element: ShoppingElement): void {
+    this.selectedElement = element;
+    this.infoModalOpen = true;
+  }
+
+  submitPrice(): void {
+    const price = this.priceFormGroup.get('price').value;
+    this.finishElement(Number(price), this.selectedElement);
   }
 }
