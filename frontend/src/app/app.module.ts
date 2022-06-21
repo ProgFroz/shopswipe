@@ -32,6 +32,9 @@ import {ShoppingEffects} from './ngrx/effect/shopping.effects';
 import * as Hammer from 'hammerjs';
 import { HammerModule } from '@angular/platform-browser';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { FinancesComponent } from './container/finances/finances.component';
+import { FinancesP12lComponent } from './presentational/finances-p12l/finances-p12l.component';
+import {FinancesEffects} from './ngrx/effect/finances.effects';
 
 firebase.initializeApp(environment.config);
 export class HammerConfig extends HammerGestureConfig {
@@ -52,7 +55,9 @@ export class HammerConfig extends HammerGestureConfig {
     JoinGroupComponent,
     JoinGroupP12lComponent,
     ShoppingComponent,
-    ShoppingP12lComponent
+    ShoppingP12lComponent,
+    FinancesComponent,
+    FinancesP12lComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.config),
@@ -63,7 +68,7 @@ export class HammerConfig extends HammerGestureConfig {
     AppRoutingModule,
     RouterModule,
     ReactiveFormsModule,
-    EffectsModule.forRoot([UserEffects, GroupsEffects, ShoppingEffects]),
+    EffectsModule.forRoot([UserEffects, GroupsEffects, ShoppingEffects, FinancesEffects]),
     StoreRootModule,
     StoreModule.forRoot(globalReducers, {}),
     StoreDevtoolsModule.instrument({

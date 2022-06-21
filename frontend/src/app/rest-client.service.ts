@@ -6,7 +6,7 @@ import {Observable, of} from 'rxjs';
 import firebase from 'firebase';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {GroupsHelper} from './util/groups.helper';
-import {ShoppingElement} from './models';
+import {FinanceElement, ShoppingElement} from './models';
 
 @Injectable({providedIn: 'root'})
 export class RestClientService {
@@ -92,4 +92,21 @@ export class RestClientService {
   deleteShopping(gid: string): Observable<any> {
     return this.http.post('/posts/shopping/delete', {gid});
   }
+
+  getFinanceList(gid: string): Observable<any> {
+    return this.http.get('/gets/finances/' + gid);
+  }
+
+  createFinanceList(gid: string): Observable<any> {
+    return this.http.post('/posts/finances/update', {gid});
+  }
+
+  deleteFinances(gid: string): Observable<any> {
+    return this.http.post('/posts/finances/delete', {gid});
+  }
+
+  updateFinancesList(gid: string, elements: FinanceElement[]): Observable<any> {
+    return this.http.post('/posts/finances/update', {gid, elements});
+  }
+
 }

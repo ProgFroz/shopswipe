@@ -4,6 +4,8 @@
   [group]="group$ | async"
   [groupLoading]="groupLoading$ | async"
   [shoppingLoading]="shoppingLoading$ | async"
+  [finances]="finances$ | async"
+  [financesLoading]="financesLoading$ | async"
   (newElementEmitter)="addElement($event)"
   (deleteElementEmitter)="deleteElement($event)"
   (finishElementEmitter)="finishElement($event)"

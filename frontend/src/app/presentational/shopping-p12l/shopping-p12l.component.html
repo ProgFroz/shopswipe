@@ -48,9 +48,7 @@
 <!--  </span>-->
 <!--</div>-->
 
-<div *ngIf="!groupLoading && !shoppingLoading && !!group.members"  class="clr-row">
-
-
+<div *ngIf="!groupLoading && !shoppingLoading && !!group && !!group.members"  class="clr-row">
   <div (tap)="showInfo(element)" (panstart)="onPanStart($event, getId(element))" (panend)="onPanEnd($event, getId(element), element)"
        (pan)="onPan($event, getId(element), element)" *ngFor="let element of shopping.elements" class="clr-col-lg-6 clr-col-12 animated">
     <div [id]="getId(element)" class="card card-clickable" [class.inactive]="!element.isActive">
@@ -64,7 +62,6 @@
             <div style="display: flex; justify-content: flex-start; align-items: center; margin-right: 20px">
               <clr-icon style="margin-right: 4px" size="20" shape="tag"></clr-icon>
               <h5 style="margin-top: 0">{{element.name}}</h5>
-
             </div>
             <div style="display: flex; justify-content: flex-start; align-items: center">
               <clr-icon style="margin-right: 4px" size="20" shape="hashtag"></clr-icon>

@@ -20,9 +20,12 @@
   padding: 6px;
 }
 
-app-groups, app-shopping {
+app-groups, app-shopping, app-finances {
   width: 100%;
   padding: 1rem;
+}
+app-finances {
+  padding-top: 0 !important;
 }
 
 .spinner-holder-centered {
@@ -193,4 +196,8 @@ app-groups, app-shopping {
 .card-clickable:hover {
   //border-color: rgb(100, 100, 100);
   //box-shadow: 0 0.15rem 0 0 rgb(100, 100, 100);
+}
+.finance-member {
+  box-shadow: 0 0.15rem 0 0 #b3b3b3;
+  border-color: #b3b3b3;
 }

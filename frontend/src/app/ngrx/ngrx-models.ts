@@ -1,18 +1,21 @@
 import {ActionReducerMap} from '@ngrx/store';
 import {userReducer} from './reducer/user.reducer';
-import {Group, Shopping, User} from '../models';
+import {Finances, Group, Shopping, User} from '../models';
 import {groupsReducer} from './reducer/groups.reducer';
 import {shoppingReducer} from './reducer/shopping.reducer';
+import {financesReducer} from './reducer/finances.reducer';
 
 export const globalReducers: ActionReducerMap<AppState> = {
   userState: userReducer,
   groupsState: groupsReducer,
-  shoppingState: shoppingReducer
+  shoppingState: shoppingReducer,
+  financesState: financesReducer
 };
 export interface AppState {
   userState: UserState;
   groupsState: GroupsState;
   shoppingState: ShoppingState;
+  financesState: FinancesState;
 }
 export interface UserState {
   user: User;
@@ -29,5 +32,10 @@ export interface GroupsState {
 
 export interface ShoppingState {
   shopping: Shopping;
+  loading: boolean;
+}
+
+export interface FinancesState {
+  finances: Finances;
   loading: boolean;
 }

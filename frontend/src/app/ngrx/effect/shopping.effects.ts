@@ -2,38 +2,27 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {Injectable} from '@angular/core';
 import {catchError, map, switchMap} from 'rxjs/operators';
 import {from, of} from 'rxjs';
-import {loadUserSuccess, updateUserGroupID} from '../action/user.actions';
 import {RestClientService} from '../../rest-client.service';
 import {Router} from '@angular/router';
-import {
-  createGroup,
-  createGroupFailure,
-  createGroupSuccess,
-  deleteGroup,
-  deleteGroupFailure,
-  deleteGroupSuccess,
-  generateNewLink,
-  generateNewLinkFailure,
-  kickMember,
-  kickMemberFailure, leaveGroup, leaveGroupFailure,
-  loadGroup,
-  loadGroupByCode,
-  loadGroupByCodeSuccess,
-  loadGroupFailure,
-  loadGroupMembers,
-  loadGroupMembersFailure,
-  loadGroupMembersSuccess,
-  loadGroupSuccess, loadGroupWasNull, promoteOwner, promoteOwnerFailure, promoteOwnerSuccess
-} from '../action/groups.actions';
+import {createGroupSuccess, deleteGroupSuccess, loadGroupSuccess} from '../action/groups.actions';
 import {GroupsHelper} from '../../util/groups.helper';
 import {
   createShopping,
-  createShoppingFailure, createShoppingSuccess,
-  deleteShopping, deleteShoppingFailure, deleteShoppingSuccess,
+  createShoppingFailure,
+  createShoppingSuccess,
+  deleteShopping,
+  deleteShoppingFailure,
+  deleteShoppingSuccess,
+  finishShoppingElement,
+  finishShoppingElementFailure,
   loadShopping,
   loadShoppingFailure,
-  loadShoppingSuccess, updateShoppingElements, updateShoppingElementsFailure, updateShoppingElementsSuccess
+  loadShoppingSuccess,
+  updateShoppingElements,
+  updateShoppingElementsFailure,
+  updateShoppingElementsSuccess
 } from '../action/shopping.actions';
+import {loadFinances, updateFinancesElements, updateFinancesElementsSuccess} from '../action/finances.actions';
 
 @Injectable()
 export class ShoppingEffects {
@@ -116,7 +105,33 @@ export class ShoppingEffects {
   loadShoppingOnGroupLoad$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadGroupSuccess),
-      map(props => loadShopping({gid: props.group.gid}))
+      map(props => !!props.group ? (loadShopping({gid: props.group.gid})) : (loadShoppingSuccess({shopping: null})))
+    )
+  );
+
+  finishShoppingElement$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(finishShoppingElement),
+      switchMap((props) => from(this.restClientService.updateShoppingList(props.gid, props.shoppingElements)).pipe(
+        map(shopping => {
+          return updateFinancesElements({gid: props.gid, elements: props.financesElements});
+        }),
+        catchError((err) => of(finishShoppingElementFailure({httpError: err})))
+      ))
+    )
+  );
+
+  updateShoppingElementsOnFinishElement$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(updateFinancesElementsSuccess),
+      map(props => loadShopping({gid: props.finances.gid}))
+    )
+  );
+
+  updateFinancesOnFinishElement$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(updateFinancesElementsSuccess),
+      map(props => loadFinances({gid: props.finances.gid}))
     )
   );
 
@@ -126,5 +141,7 @@ export class ShoppingEffects {
     private router: Router
   ) {
   }
+
 }
+
 

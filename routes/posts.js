@@ -5,6 +5,7 @@ const options = require('../config/admin');
 const User = require('../schema/users');
 const Group = require('../schema/groups');
 const Shopping = require('../schema/shoppings');
+const Finances = require('../schema/finances');
 
 admin.initializeApp({
   credential: admin.credential.cert(options),
@@ -172,6 +173,19 @@ router.post('/shopping/update', (req, res) => {
   })
 });
 
+router.post('/shopping/finish', (req, res) => {
+  Shopping.findOne({gid: req.body.gid}).then((e) => {
+    if (e) {
+      e.elements = req.body.elements ? req.body.elements : e.elements;
+      e.save().then((data) => {
+        res.json(data);
+      }).catch(err => {
+        res.json({message: err});
+      })
+    }
+  })
+});
+
 router.post('/shopping/delete', (req, res) => {
   Shopping.findOneAndDelete({gid: req.body.gid}).then((e) => {
     if (e) {
@@ -183,4 +197,44 @@ router.post('/shopping/delete', (req, res) => {
     }
   })
 });
+
+router.post('/finances/update', (req, res) => {
+  const u = new Finances({
+    gid: req.body.gid,
+    date: req.body.date,
+    elements: []
+  });
+  Finances.findOne({gid: req.body.gid}).then((e) => {
+    if (e) {
+      e.gid = req.body.gid ? req.body.gid : e.gid;
+      e.date = req.body.date ? req.body.date : e.date;
+      e.elements = req.body.elements ? req.body.elements : e.elements;
+      e.save().then((data) => {
+        res.json(data);
+      }).catch(err => {
+        res.json({message: err});
+      })
+    }
+    else {
+      u.save().then((data) => {
+        res.json(data);
+      }).catch(err => {
+        res.json({message: err});
+      })
+    }
+  })
+});
+
+router.post('/finances/delete', (req, res) => {
+  Finances.findOneAndDelete({gid: req.body.gid}).then((e) => {
+    if (e) {
+      e.save().then((data) => {
+        res.json(data);
+      }).catch(err => {
+        res.json({message: err});
+      })
+    }
+  })
+});
+
 module.exports = router;

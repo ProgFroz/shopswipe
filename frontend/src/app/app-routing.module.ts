@@ -6,6 +6,7 @@ import {HomeComponent} from './container/home/home.component';
 import {GroupsComponent} from './container/groups/groups.component';
 import {JoinGroupComponent} from './container/join-group/join-group.component';
 import {ShoppingComponent} from './container/shopping/shopping.component';
+import {FinancesComponent} from './container/finances/finances.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -15,6 +16,7 @@ const routes: Routes = [
       { path: 'group', component: GroupsComponent },
       { path: 'join/:code', component: JoinGroupComponent },
       { path: 'shopping', component: ShoppingComponent },
+      { path: 'finances', component: FinancesComponent },
     ]},
 
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
