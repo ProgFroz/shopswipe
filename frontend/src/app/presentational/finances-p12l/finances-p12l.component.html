@@ -1,36 +1,51 @@
 <div *ngIf="!!finances && !!group && !!group.members">
-  <div class="clr-row" style="padding-bottom: 1rem">
-    <div *ngFor="let vk of financesGrouped | keyvalue" class="clr-col-lg-6 clr-col-12">
-      <div class="card finance-member">
-        <div class="card-block member-card">
-          <div class="icon-and-name-holder">
-            <img style="width: 40px; height: 40px;" [src]="findAccordingMember(vk.key)?.imageUrl">
-            <h5>{{findAccordingMember(vk.key)?.username}}</h5>
-          </div>
-          <div style="display: flex; justify-content: flex-end; align-items: center">
-            <clr-icon style="margin-right: 4px" size="20" shape="euro"></clr-icon>
-            <h5 style="margin: 0">{{financesSumsByUser.get(findAccordingMember(vk.key)?.uid)}}</h5>
-          </div>
-        </div>
-      </div>
 
-      <div *ngFor="let el of vk.value" class="card">
-        <div class="card-block member-card clr-row">
-          <div class="clr-col-4" style="display: flex; justify-content: flex-start; align-items: center">
-            <clr-icon style="margin-right: 4px" size="20" shape="tag"></clr-icon>
-            <h5 style="margin-top: 0">{{el.name}}</h5>
+  <clr-tabs>
+    <clr-tab *ngFor="let month of months">
+      <ng-container>
+        <button clrTabLink>{{financesHelper.getMonthNameFromMonthYearKey(month)}}</button>
+        <clr-tab-content *clrIfActive>
+
+          <div class="clr-row" style="padding-bottom: 1rem">
+            <div *ngFor="let vk of financesGroupedByMonth.get(month) | keyvalue" class="clr-col-lg-6 clr-col-12">
+              <div class="card finance-member">
+                <div class="card-block member-card">
+                  <div class="icon-and-name-holder">
+                    <img style="width: 40px; height: 40px;" [src]="findAccordingMember(vk.key)?.imageUrl">
+                    <h5>{{findAccordingMember(vk.key)?.username}}</h5>
+                  </div>
+                  <div style="display: flex; justify-content: flex-end; align-items: center">
+                    <clr-icon style="margin-right: 4px" size="20" shape="euro"></clr-icon>
+                    <h5 style="margin: 0">{{financesSumsByUserByMonth.get(month).get(findAccordingMember(vk.key)?.uid)}}</h5>
+                  </div>
+                </div>
+              </div>
+
+              <div *ngFor="let el of vk.value" class="card">
+                <div class="card-block member-card clr-row">
+                  <div class="clr-col-4" style="display: flex; justify-content: flex-start; align-items: center">
+                    <clr-icon style="margin-right: 4px" size="20" shape="tag"></clr-icon>
+                    <h5 style="margin-top: 0">{{el.name}}</h5>
+                  </div>
+                  <div class="clr-col-4" style="display: flex; justify-content: center; align-items: center">
+                    <clr-icon style="margin-right: 4px" size="20" shape="hashtag"></clr-icon>
+                    <h5 style="margin-top: 0">{{el.amount}}</h5>
+                  </div>
+                  <div class="clr-col-4" style="display: flex; justify-content: flex-end; align-items: center">
+                    <clr-icon style="margin-right: 4px" size="20" shape="euro"></clr-icon>
+                    <h5 style="margin-top: 0">{{el.price}}</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="clr-col-4" style="display: flex; justify-content: center; align-items: center">
-            <clr-icon style="margin-right: 4px" size="20" shape="hashtag"></clr-icon>
-            <h5 style="margin-top: 0">{{el.amount}}</h5>
-          </div>
-          <div class="clr-col-4" style="display: flex; justify-content: flex-end; align-items: center">
-            <clr-icon style="margin-right: 4px" size="20" shape="euro"></clr-icon>
-            <h5 style="margin-top: 0">{{el.price}}</h5>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+
+        </clr-tab-content>
+      </ng-container>
+
+    </clr-tab>
+  </clr-tabs>
+
+
 
 </div>

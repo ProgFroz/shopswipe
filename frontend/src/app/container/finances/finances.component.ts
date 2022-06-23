@@ -7,10 +7,11 @@ import {AppState} from '../../ngrx/ngrx-models';
 import {Store} from '@ngrx/store';
 import {
   selectFinances,
-  selectFinancesGroupedSortedByUser,
+  selectFinancesGroupedSortedByUser, selectFinancesLastThreeMonths,
   selectFinancesLoading,
   selectFinancesSumByUser
 } from '../../ngrx/selector/finances.selectors';
+import {MonthYear} from '../../util/finances.helper';
 
 @Component({
   selector: 'app-finances',
@@ -21,12 +22,12 @@ export class FinancesComponent implements OnInit {
 
   public user$: Observable<User> = this.store.select(selectUser);
   public finances$: Observable<Finances> = this.store.select(selectFinances);
-  public financesGrouped$: Observable<Map<string, FinanceElement[]>> = this.store.select(selectFinancesGroupedSortedByUser);
+  public financesGrouped$: Observable<Map<string, Map<string, FinanceElement[]>>> = this.store.select(selectFinancesLastThreeMonths);
   public group$: Observable<Group> = this.store.select(selectGroup);
   public groupLoading$: Observable<boolean> = this.store.select(selectGroupLoading);
   public financesLoading$: Observable<boolean> = this.store.select(selectFinancesLoading);
   public groupMembersLoading$: Observable<boolean> = this.store.select(selectGroupLoading);
-  public financesSumByUser$: Observable<Map<string, number>> = this.store.select(selectFinancesSumByUser);
+  public financesSumByUser$: Observable<Map<string, Map<string, number>>> = this.store.select(selectFinancesSumByUser);
 
   constructor(private store: Store<AppState>) {
   }

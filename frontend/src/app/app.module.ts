@@ -35,6 +35,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import { FinancesComponent } from './container/finances/finances.component';
 import { FinancesP12lComponent } from './presentational/finances-p12l/finances-p12l.component';
 import {FinancesEffects} from './ngrx/effect/finances.effects';
+import {MatTabsModule} from '@angular/material/tabs';
 
 firebase.initializeApp(environment.config);
 export class HammerConfig extends HammerGestureConfig {
@@ -77,6 +78,7 @@ export class HammerConfig extends HammerGestureConfig {
     }),
     HammerModule,
     DragDropModule,
+    MatTabsModule
 
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'de-DE'}, {provide: HAMMER_GESTURE_CONFIG, useClass: HammerConfig}],

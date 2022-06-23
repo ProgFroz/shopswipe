@@ -12,7 +12,6 @@
 
 *:focus {
   outline: none !important;
-  box-shadow: none !important;
 }
 .userimg {
   width: 60px;
@@ -24,7 +23,7 @@ app-groups, app-shopping, app-finances {
   width: 100%;
   padding: 1rem;
 }
-app-finances {
+app-finances, app-shopping {
   padding-top: 0 !important;
 }
 
@@ -200,4 +199,18 @@ app-finances {
 .finance-member {
   box-shadow: 0 0.15rem 0 0 #b3b3b3;
   border-color: #b3b3b3;
+}
+
+clr-tabs ul {
+  position: absolute;
+  z-index: 99;
+  background: #fafafa;
+  left: 19px;
+  width: calc(100vw - 20px) !important;
+}
+clr-tabs .clr-col-lg-6:first-child {
+  margin-top: 1.5rem;
+}
+.login-wrapper {
+  background: url("assets/cover.jpg");
 }
