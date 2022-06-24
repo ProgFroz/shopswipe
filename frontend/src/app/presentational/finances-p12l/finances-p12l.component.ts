@@ -33,9 +33,10 @@ export class FinancesP12lComponent implements OnInit {
   }
 
   ngOnChanges(simpleChanges: SimpleChanges): void {
-    this.months = Array.from(this.financesGroupedByMonth.keys());
-    this.months.sort((a, b) => FinancesHelper.getMonthFromMonthYearKey(b) - FinancesHelper.getMonthFromMonthYearKey(a));
-    console.log(this.months);
+    if (!!this.financesGroupedByMonth) {
+      this.months = Array.from(this.financesGroupedByMonth.keys());
+      this.months.sort((a, b) => FinancesHelper.getMonthFromMonthYearKey(b) - FinancesHelper.getMonthFromMonthYearKey(a));
+    }
   }
 
   findAccordingMember(uid: string): User {

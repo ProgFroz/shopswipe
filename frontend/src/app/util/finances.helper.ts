@@ -23,7 +23,9 @@ export class FinancesHelper {
   public static groupByMonth(finances: Finances): Map<string, FinanceElement[]> {
     const map: Map<string, FinanceElement[]> = new Map<string, FinanceElement[]>();
     if (!finances) { return map; }
-    finances.elements.forEach((el) => {
+    const calcualtedFinances: Finances = this.calculateFinances(finances);
+
+    calcualtedFinances.elements.forEach((el) => {
       const month = moment(el.date).month();
       const year = moment(el.date).year();
       const key = this.createMonthYearKey(month, year);
@@ -34,7 +36,6 @@ export class FinancesHelper {
         map.set(key, [el]);
       }
     });
-    console.log('1', map);
     return map;
   }
 
@@ -100,6 +101,15 @@ export class FinancesHelper {
 
     const inv = new Map([...map].reverse());
     return inv;
+  }
+
+  private static calculateFinances(finances: Finances): Finances {
+    const copy: Finances = {...finances};
+    copy.elements.forEach((el) => {
+      el.price = el.price * el.amount;
+    });
+    console.log(copy);
+    return copy;
   }
 }
 export interface MonthYear {
