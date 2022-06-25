@@ -7,33 +7,33 @@
         <clr-tab-content *clrIfActive>
 
           <div class="clr-row" style="padding-bottom: 1rem">
-            <div *ngFor="let vk of financesGroupedByMonth.get(month) | keyvalue" class="clr-col-lg-6 clr-col-12">
+            <div *ngFor="let vk of financesMetaInformation.get(month) | keyvalue" class="clr-col-lg-6 clr-col-12">
               <div class="card finance-member">
                 <div class="card-block member-card">
                   <div class="icon-and-name-holder">
-                    <img style="width: 40px; height: 40px;" [src]="findAccordingMember(vk.key)?.imageUrl">
-                    <h5>{{findAccordingMember(vk.key)?.username}}</h5>
+                    <img style="width: 40px; height: 40px;" [src]="vk.value.imageUrl">
+                    <h5>{{vk.value.name}}</h5>
                   </div>
                   <div style="display: flex; justify-content: flex-end; align-items: center">
                     <clr-icon style="margin-right: 4px" size="20" shape="euro"></clr-icon>
-                    <h5 style="margin: 0">{{financesSumsByUserByMonth.get(month).get(findAccordingMember(vk.key)?.uid)}}</h5>
+                    <h5 style="margin: 0">{{vk.value.sum}}</h5>
                   </div>
                 </div>
               </div>
 
-              <div *ngFor="let el of vk.value" class="card">
+              <div *ngFor="let el of financesGroupedByMonth.get(month).get(vk.value.uid) | keyvalue" class="card">
                 <div class="card-block member-card clr-row">
                   <div class="clr-col-4" style="display: flex; justify-content: flex-start; align-items: center">
                     <clr-icon style="margin-right: 4px" size="20" shape="tag"></clr-icon>
-                    <h5 style="margin-top: 0">{{el.name}}</h5>
+                    <h5 style="margin-top: 0">{{el.value.name}}</h5>
                   </div>
                   <div class="clr-col-4" style="display: flex; justify-content: center; align-items: center">
                     <clr-icon style="margin-right: 4px" size="20" shape="hashtag"></clr-icon>
-                    <h5 style="margin-top: 0">{{el.amount}}</h5>
+                    <h5 style="margin-top: 0">{{el.value.amount}}</h5>
                   </div>
                   <div class="clr-col-4" style="display: flex; justify-content: flex-end; align-items: center">
                     <clr-icon style="margin-right: 4px" size="20" shape="euro"></clr-icon>
-                    <h5 style="margin-top: 0">{{el.price}}</h5>
+                    <h5 style="margin-top: 0">{{el.value.price}}</h5>
                   </div>
                 </div>
               </div>

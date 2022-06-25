@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, SimpleChanges} from '@angular/core';
 import {FinanceElement, Finances, Group, User} from '../../models';
 import * as moment from 'moment';
-import {FinancesHelper, MonthYear} from '../../util/finances.helper';
+import {FinancesHelper, FinancesMeta, MonthYear} from '../../util/finances.helper';
 
 @Component({
   selector: 'app-finances-p12l',
@@ -13,6 +13,7 @@ export class FinancesP12lComponent implements OnInit {
   @Input() finances: Finances;
   @Input() financesLoading: boolean;
   @Input() financesGroupedByMonth: Map<string, Map<string, FinanceElement[]>>;
+  @Input() financesMetaInformation: Map<string, FinancesMeta[]>;
   @Input() financesSumsByUserByMonth: Map<string, Map<string, number>>;
   @Input() user: User;
   @Input() group: Group;
@@ -37,13 +38,7 @@ export class FinancesP12lComponent implements OnInit {
       this.months = Array.from(this.financesGroupedByMonth.keys());
       this.months.sort((a, b) => FinancesHelper.getMonthFromMonthYearKey(b) - FinancesHelper.getMonthFromMonthYearKey(a));
     }
-  }
 
-  findAccordingMember(uid: string): User {
-    for (const member of this.group.members) {
-      if (member.uid === uid) { return member; }
-    }
-    return null;
   }
 
 }

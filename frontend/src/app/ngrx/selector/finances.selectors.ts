@@ -23,6 +23,11 @@ export const selectFinancesSumByUser = createSelector(
   (map: Map<string, Map<string, FinanceElement[]>>) => FinancesHelper.sumFinancesByUser(map)
 );
 
+export const selectFinancesMetaInformation = createSelector(
+  selectFinancesGroupedSortedByUser,
+  (map: Map<string, Map<string, FinanceElement[]>>) => FinancesHelper.sumFinancesMetaInformation(map)
+);
+
 export const selectFinancesLoading = createSelector(
   selectFinancesState,
   (state: FinancesState) => state.loading

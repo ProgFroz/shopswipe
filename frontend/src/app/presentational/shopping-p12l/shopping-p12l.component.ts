@@ -119,12 +119,14 @@ export class ShoppingP12lComponent implements OnInit {
     newFinancesElements.push({
       id: element.id,
       name: element.name,
-      author: element.uid,
-      buyer: this.user.uid,
+      author: this.findMember(element.uid)?.username,
+      buyer: this.user.username,
       description: element.description,
       amount: element.amount,
       date: new Date(),
-      price
+      price,
+      imageUrl: this.user.imageUrl,
+      buyeruid: this.user.uid
     });
     this.finishElementEmitter.emit({gid: this.user.gid, shoppingElements: newElements, financesElements: newFinancesElements});
   }
@@ -205,5 +207,13 @@ export class ShoppingP12lComponent implements OnInit {
   submitPrice(): void {
     const price = this.priceFormGroup.get('price').value;
     this.finishElement(Number(price), this.selectedElement);
+  }
+
+  private findMember(uid: string): User {
+    if (!uid) { return null; }
+    for (const u of this.group.members) {
+      if (u.uid === uid) { return u; }
+    }
+    return null;
   }
 }

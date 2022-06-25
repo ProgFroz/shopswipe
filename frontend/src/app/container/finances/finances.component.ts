@@ -8,10 +8,10 @@ import {Store} from '@ngrx/store';
 import {
   selectFinances,
   selectFinancesGroupedSortedByUser, selectFinancesLastThreeMonths,
-  selectFinancesLoading,
+  selectFinancesLoading, selectFinancesMetaInformation,
   selectFinancesSumByUser
 } from '../../ngrx/selector/finances.selectors';
-import {MonthYear} from '../../util/finances.helper';
+import {FinancesMeta, MonthYear} from '../../util/finances.helper';
 
 @Component({
   selector: 'app-finances',
@@ -28,6 +28,7 @@ export class FinancesComponent implements OnInit {
   public financesLoading$: Observable<boolean> = this.store.select(selectFinancesLoading);
   public groupMembersLoading$: Observable<boolean> = this.store.select(selectGroupLoading);
   public financesSumByUser$: Observable<Map<string, Map<string, number>>> = this.store.select(selectFinancesSumByUser);
+  public financesMetaInformation$: Observable<Map<string, FinancesMeta[]>> = this.store.select(selectFinancesMetaInformation);
 
   constructor(private store: Store<AppState>) {
   }

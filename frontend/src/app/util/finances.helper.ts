@@ -8,11 +8,11 @@ export class FinancesHelper {
     groupedMap.forEach(((elements, month) => {
       const map: Map<string, FinanceElement[]> = new Map<string, FinanceElement[]>();
       elements.forEach((el) => {
-        if (map.has(el.buyer)) {
-          map.get(el.buyer).push(el);
+        if (map.has(el.buyeruid)) {
+          map.get(el.buyeruid).push(el);
         }
         else {
-          map.set(el.buyer, [el]);
+          map.set(el.buyeruid, [el]);
         }
       });
       overallMap.set(month, map);
@@ -48,11 +48,33 @@ export class FinancesHelper {
         elements.forEach((el) => {
           sum += el.price;
         });
+        console.log('uid', uid);
         map.set(uid, sum);
       });
       overallMap.set(month, map);
     }));
     return overallMap;
+  }
+
+  public static sumFinancesMetaInformation(groupedMap: Map<string, Map<string, FinanceElement[]>>): Map<string, FinancesMeta[]> {
+    const financesMetaMap: Map<string, FinancesMeta[]> = new Map<string, FinancesMeta[]>();
+    groupedMap.forEach(((value, month) => {
+      const financesMeta: FinancesMeta[] = [];
+      value.forEach((elements, uid) => {
+        let sum = 0;
+        elements.forEach((el) => {
+          sum += el.price;
+        });
+        financesMeta.push({
+          imageUrl: elements.length > 0 ? elements[0].imageUrl : '',
+          uid: elements.length > 0 ? elements[0].buyeruid : '',
+          name: elements.length > 0 ? elements[0].buyer : '',
+          sum
+        });
+      });
+      financesMetaMap.set(month, financesMeta);
+    }));
+    return financesMetaMap;
   }
 
   public static getMonthByNumber(num: number): string {
@@ -105,10 +127,11 @@ export class FinancesHelper {
 
   private static calculateFinances(finances: Finances): Finances {
     const copy: Finances = {...finances};
-    copy.elements.forEach((el) => {
-      el.price = el.price * el.amount;
+    copy.elements = [];
+    finances.elements.forEach((el) => {
+      const c = {...el, price: el.price * el.amount};
+      copy.elements.push(c);
     });
-    console.log(copy);
     return copy;
   }
 }
@@ -116,4 +139,10 @@ export interface MonthYear {
   month: number;
   year: number;
   monthName: string;
+}
+export interface FinancesMeta {
+  imageUrl: string;
+  uid: string;
+  name: string;
+  sum: number;
 }

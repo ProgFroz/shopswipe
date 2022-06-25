@@ -45,8 +45,10 @@ export interface FinanceElement {
   name: string;
   author: string;
   buyer: string;
+  buyeruid: string;
   description: string;
   amount: number;
   price: number;
+  imageUrl: string;
   date: Date;
 }
