@@ -1,0 +1,70 @@
+<clr-stack-view>
+  <clr-stack-header>Help</clr-stack-header>
+
+  <clr-stack-block [clrStackViewLevel]="1" [clrStackViewSetsize]="3" [clrStackViewPosinset]="1">
+    <clr-stack-label>Shopping List</clr-stack-label>
+    <clr-stack-content></clr-stack-content>
+    <clr-stack-block [clrStackViewLevel]="2" [clrStackViewSetsize]="3" [clrStackViewPosinset]="1">
+      <clr-stack-label>Purpose</clr-stack-label>
+      <clr-stack-content>The shopping list is the place where all members of a group add, buy and delete given items.</clr-stack-content>
+    </clr-stack-block>
+    <clr-stack-block [clrStackViewLevel]="2" [clrStackViewSetsize]="3" [clrStackViewPosinset]="2">
+      <clr-stack-label>Adding Item</clr-stack-label>
+      <clr-stack-content>If you want to add an item, simply click the plus in the bottom right corner, a modal will pop up where further information may be inserted.</clr-stack-content>
+    </clr-stack-block>
+    <clr-stack-block [clrStackViewLevel]="2" [clrStackViewSetsize]="3" [clrStackViewPosinset]="3">
+      <clr-stack-label>Buying Item</clr-stack-label>
+      <clr-stack-content>While shopping, simply swipe a given item to the right side of the screen while a green border appears, a modal will pop up where you may insert the paid price. If the given item is set to repeatable, it will be grayed out after completion.</clr-stack-content>
+    </clr-stack-block>
+    <clr-stack-block [clrStackViewLevel]="2" [clrStackViewSetsize]="3" [clrStackViewPosinset]="4">
+      <clr-stack-label>Deleting Item</clr-stack-label>
+      <clr-stack-content>If you wish to completely remove an item from the list, simply swipe the item to the left side of the screen while a red border appears. It will then be deleted permanently.</clr-stack-content>
+    </clr-stack-block>
+    <clr-stack-block [clrStackViewLevel]="2" [clrStackViewSetsize]="3" [clrStackViewPosinset]="5">
+      <clr-stack-label>Repeatable Item</clr-stack-label>
+      <clr-stack-content>Items that you buy often enough to prevent them from being removed after completion can be set to repeatable during creation. A grayed out item is inactive, and can be activated again by swiping it to the right side of the screen, a blue border will then appear during swiping.</clr-stack-content>
+    </clr-stack-block>
+  </clr-stack-block>
+
+  <clr-stack-block [clrStackViewLevel]="1" [clrStackViewSetsize]="3" [clrStackViewPosinset]="2">
+    <clr-stack-label>Group</clr-stack-label>
+    <clr-stack-content></clr-stack-content>
+    <clr-stack-block [clrStackViewLevel]="2" [clrStackViewSetsize]="3" [clrStackViewPosinset]="1">
+      <clr-stack-label>Purpose</clr-stack-label>
+      <clr-stack-content>A group acts as collection of individuals. If you wish to start a shopping list, you must be part of a group. In case you want to use the shopping list feature for yourself, simply create a group for yourself!</clr-stack-content>
+    </clr-stack-block>
+    <clr-stack-block [clrStackViewLevel]="2" [clrStackViewSetsize]="3" [clrStackViewPosinset]="2">
+      <clr-stack-label>Create Group</clr-stack-label>
+      <clr-stack-content>For creating a group click at the plus button in the center of the screen. A modal will pop up where you may insert the name of the group.</clr-stack-content>
+    </clr-stack-block>
+    <clr-stack-block [clrStackViewLevel]="2" [clrStackViewSetsize]="3" [clrStackViewPosinset]="3">
+      <clr-stack-label>Inviting Members</clr-stack-label>
+      <clr-stack-content>If you wish to share your shopping list with others, click on the share icon at the top right corner. There you find the current invitation link, which can be copied by clicking the copy button. Send this link to other friends to share your items!</clr-stack-content>
+    </clr-stack-block>
+    <clr-stack-block [clrStackViewLevel]="2" [clrStackViewSetsize]="3" [clrStackViewPosinset]="4">
+      <clr-stack-label>Kicking Members</clr-stack-label>
+      <clr-stack-content>Íf a member does not behave a certain way or simply does not belong to your group anymore, you can remove them by clicking the X right to their names. This only works if you are the group admin, which is marked by a crown symbol.</clr-stack-content>
+    </clr-stack-block>
+    <clr-stack-block [clrStackViewLevel]="2" [clrStackViewSetsize]="3" [clrStackViewPosinset]="4">
+      <clr-stack-label>Generate New Link</clr-stack-label>
+      <clr-stack-content>To prevent a former member from rejoining your group, or because you want to prevent other individuals from being able to join with your current link, you may click the refresh symbol in the share modal, which will generate a new link and invalidate the former link.</clr-stack-content>
+    </clr-stack-block>
+    <clr-stack-block [clrStackViewLevel]="2" [clrStackViewSetsize]="3" [clrStackViewPosinset]="5">
+      <clr-stack-label>Leaving Group</clr-stack-label>
+      <clr-stack-content>If you wish to leave a certain group, click at the leave symbol at the top right corner. If you are the owner of a given group, owner permissions will be transfered to a random member. Should you be the only member left, the group will be permanently deleted.</clr-stack-content>
+    </clr-stack-block>
+    <clr-stack-block [clrStackViewLevel]="2" [clrStackViewSetsize]="3" [clrStackViewPosinset]="6">
+      <clr-stack-label>Joining Group</clr-stack-label>
+      <clr-stack-content>If you wish to join a new group, you require the current invitation link, which is only visible to the group owner. Therefore, ask the owner to send you the current link. In case you are in a group already, you will leave your current group in order to join a new one.</clr-stack-content>
+    </clr-stack-block>
+  </clr-stack-block>
+
+  <clr-stack-block [clrStackViewLevel]="1" [clrStackViewSetsize]="3" [clrStackViewPosinset]="3">
+    <clr-stack-label>Finances</clr-stack-label>
+    <clr-stack-content></clr-stack-content>
+    <clr-stack-block>
+      <clr-stack-label>Purpose</clr-stack-label>
+      <clr-stack-content>At the finances tab you get information about all expenses in the last three months made by all group members.</clr-stack-content>
+    </clr-stack-block>
+  </clr-stack-block>
+</clr-stack-view>
