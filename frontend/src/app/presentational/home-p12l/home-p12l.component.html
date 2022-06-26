@@ -23,6 +23,7 @@
         </button>
         <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
           <a (click)="emitLogout()" clrDropdownItem>Log out</a>
+          <a [routerLink]="['/home/help']" clrDropdownItem>Help</a>
         </clr-dropdown-menu>
       </clr-dropdown>
     </div>

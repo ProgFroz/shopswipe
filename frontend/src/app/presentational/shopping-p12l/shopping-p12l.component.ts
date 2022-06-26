@@ -183,13 +183,17 @@ export class ShoppingP12lComponent implements OnInit {
         }
       }
     } else {
-      el.style.transform = 'translateX(' + 0 + 'px)';
-      el.style.transition = 'all 0.2s ease';
-      el.style.borderColor = 'hsl(0, 0%, 87%)';
-      el.style.boxShadow = '0 0.15rem 0 0 #dedede';
+      this.resetPosition(el);
     }
 
     el.style.zIndex = '0';
+  }
+
+  private resetPosition(el: HTMLElement): void {
+    el.style.transform = 'translateX(' + 0 + 'px)';
+    el.style.transition = 'all 0.2s ease';
+    el.style.borderColor = 'hsl(0, 0%, 87%)';
+    el.style.boxShadow = '0 0.15rem 0 0 #dedede';
   }
 
   onPanStart($event, id: number): void {
@@ -215,5 +219,11 @@ export class ShoppingP12lComponent implements OnInit {
       if (u.uid === uid) { return u; }
     }
     return null;
+  }
+
+  cancelPrice(id: number, shoppingElement: ShoppingElement): void {
+    console.log(id);
+    const el = document.getElementById('' + id);
+    this.resetPosition(el);
   }
 }

@@ -36,6 +36,8 @@ import { FinancesComponent } from './container/finances/finances.component';
 import { FinancesP12lComponent } from './presentational/finances-p12l/finances-p12l.component';
 import {FinancesEffects} from './ngrx/effect/finances.effects';
 import {MatTabsModule} from '@angular/material/tabs';
+import { HelpComponent } from './container/help/help.component';
+import { HelpP12lComponent } from './presentational/help-p12l/help-p12l.component';
 
 firebase.initializeApp(environment.config);
 export class HammerConfig extends HammerGestureConfig {
@@ -58,7 +60,9 @@ export class HammerConfig extends HammerGestureConfig {
     ShoppingComponent,
     ShoppingP12lComponent,
     FinancesComponent,
-    FinancesP12lComponent
+    FinancesP12lComponent,
+    HelpComponent,
+    HelpP12lComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.config),

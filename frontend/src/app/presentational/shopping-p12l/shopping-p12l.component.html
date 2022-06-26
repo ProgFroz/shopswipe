@@ -1,5 +1,5 @@
 <div *ngIf="!!group" class="add-shopping-button" style="position: absolute; bottom: 40px; right: 40px">
-  <div title="Add Element" (click)="addElementModalOpen = true">
+  <div title="Add Item" (click)="addElementModalOpen = true">
     <clr-icon shape="plus" size="26"></clr-icon>
   </div>
 </div>
@@ -13,7 +13,7 @@
 
 
 
-<clr-modal *ngIf="shopping" [(clrModalOpen)]="addElementModalOpen">
+<clr-modal *ngIf="shopping" [(clrModalOpen)]="addElementModalOpen" [clrModalClosable]="false">
   <h3 class="modal-title">Add Element</h3>
   <div class="modal-body">
     <form [formGroup]="elementFormGroup" clrForm>
@@ -94,7 +94,7 @@
   </div>
 </div>
 
-<clr-modal [(clrModalOpen)]="addPriceModalOpen" clrModalClosable="false">
+<clr-modal *ngIf="selectedElement" [(clrModalOpen)]="addPriceModalOpen" [clrModalClosable]="false">
   <h3 class="modal-title">Add Price</h3>
   <div class="modal-body">
     <p>{{selectedElement?.name}}</p>
@@ -108,12 +108,12 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline" (click)="addPriceModalOpen = false">Cancel</button>
+    <button type="button" class="btn btn-outline" (click)="cancelPrice(getId(selectedElement), selectedElement); addPriceModalOpen = false">Cancel</button>
     <button type="button" class="btn btn-primary" [disabled]="priceFormGroup.invalid" (click)="submitPrice(); addPriceModalOpen = false">Ok</button>
   </div>
 </clr-modal>
 
-<clr-modal *ngIf="selectedElement" [(clrModalOpen)]="infoModalOpen">
+<clr-modal *ngIf="selectedElement" [(clrModalOpen)]="infoModalOpen" [clrModalClosable]="false">
   <h3 class="modal-title">Element Info</h3>
   <div class="modal-body">
     <div class="clr-row">
@@ -139,7 +139,6 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline" (click)="addPriceModalOpen = false">Cancel</button>
-    <button type="button" class="btn btn-primary" [disabled]="priceFormGroup.invalid" (click)="submitPrice(); addPriceModalOpen = false">Ok</button>
+    <button type="button" class="btn btn-primary" (click)="infoModalOpen = false">Ok</button>
   </div>
 </clr-modal>
