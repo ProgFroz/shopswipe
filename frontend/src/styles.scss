@@ -214,3 +214,10 @@ clr-tabs .clr-col-lg-6 {
 .login-wrapper {
   background: url("assets/cover.jpg");
 }
+.clickable-text {
+  color: hsl(198, 100%, 32%);
+  cursor: pointer;
+}
+.clickable-text:hover {
+  color: hsl(198, 100%, 15%);
+}

@@ -22,7 +22,7 @@
       <div class="card">
         <div class="card-block member-card">
           <div class="icon-and-name-holder">
-            <img [src]="member.imageUrl">
+            <img [src]="member.imageUrl ? member.imageUrl : '/assets/avatar.png'">
             <clr-icon *ngIf="isOwner(member)" shape="crown" size="24"></clr-icon>
             <h5>{{member.username}}</h5>
           </div>
