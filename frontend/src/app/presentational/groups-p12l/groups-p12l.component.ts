@@ -45,7 +45,7 @@ export class GroupsP12lComponent implements OnInit {
   // tslint:disable-next-line:use-lifecycle-interface
   ngOnChanges(changes: SimpleChanges): void {
     if (this.group) {
-      this.link = 'localhost:7080/home/join/' + this.group.code;
+      this.link = 'https://shopswipe-project.herokuapp.com/home/join/' + this.group.code;
     }
   }
 
