@@ -9,6 +9,6 @@ const connectionDB = async() => {
   }).catch((err) => {
     console.log('DB Error: ' + err);
   });
-  console.log('DB Connected!s');
+  console.log('DB Connected!');
 };
 module.exports = connectionDB;

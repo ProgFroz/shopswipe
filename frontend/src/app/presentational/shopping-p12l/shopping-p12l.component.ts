@@ -147,19 +147,8 @@ export class ShoppingP12lComponent implements OnInit {
     const left = $event.deltaX < 0;
     if (!this.panend) {
       el.style.transform = 'translateX(' + $event.deltaX + 'px)';
-      let rv = 255 * (1 - ($event.deltaX / -1150));
-      rv = rv < 195 ? 195 : rv;
-      let gv = 255 * (1 - ($event.deltaX / 1150));
-      gv = gv < 195 ? 195 : gv;
-      let gvn = $event.deltaX / 500;
-      gvn = gvn > 1 ? 1 : gvn;
-      let rvn = $event.deltaX / -500;
-      rvn = rvn > 1 ? 1 : rvn;
-      // el.style.background = left ? 'rgb(255,' + rv + ',' + rv + ')' : (element.isActive ? 'rgba(' + gv + ',255,' + gv + ')' :
-      // 'rgba(' + gv + ',' + gv + ', 255)');
-      // el.style.borderColor = !left ? 'hsl(93, ' + gvn * 100 + '%, 26%)' : 'hsl(9, ' + rvn * 100 + '%, 43%)';
-      // el.style.boxShadow = '0 0.15rem 0 0' + (!left ? 'hsl(93, ' + gvn * 100 + '%, 26%)' : 'hsl(9, ' + rvn * 100 + '%, 43%)');
       el.style.borderColor = left ? 'hsl(9, 100%, 43%)' : (element.isActive ? 'hsl(93, 100%, 26%)' : 'hsl(198, 100%, 32%)');
+      // tslint:disable-next-line:max-line-length
       el.style.boxShadow = '0 0.15rem 0 0 ' + (left ? 'hsl(9, 100%, 43%)' : (element.isActive ? 'hsl(93, 100%, 26%)' : 'hsl(198, 100%, 32%)'));
     }
   }
